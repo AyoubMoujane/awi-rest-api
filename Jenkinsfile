@@ -6,7 +6,7 @@ pipeline {
         }
     }
 
-    tools {nodejs "NodejsLTS"}
+    tools {nodejs "node"}
 
     environment {
         HOME= '.'
@@ -14,6 +14,11 @@ pipeline {
         registry = "ayoubmoujane/awi-rest-api"
     }
     stages {
+        stage('Example') {
+            steps {
+                sh 'npm config ls'
+            }
+        }
         stage('Build') {
             steps {
                 sh 'npm install'
@@ -21,7 +26,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'npm -v'
+                sh 'npm config ls'
                 sh 'npm test'
             }
         }
