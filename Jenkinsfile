@@ -11,12 +11,6 @@ pipeline {
         registry = "ayoubmoujane/awi-rest-api"
     }
     stages {
-        stage('Example') {
-            steps {
-                sh 'npm -v'  
-                sh 'node -v'
-            }
-        }
         stage('Build') {
             steps {
                 sh 'npm install'
