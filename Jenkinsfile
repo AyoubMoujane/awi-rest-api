@@ -6,8 +6,6 @@ pipeline {
         }
     }
 
-    tools {nodejs "node"}
-
     environment {
         HOME= '.'
         CI = 'true'
@@ -16,7 +14,10 @@ pipeline {
     stages {
         stage('Example') {
             steps {
-                sh 'npm config ls'
+                nodejs(nodeJSInstallationName: 'node') {
+                    sh 'npm -v'  
+                    sh 'node -v'
+                }
             }
         }
         stage('Build') {
@@ -26,8 +27,11 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'npm config ls'
-                sh 'npm test'
+                nodejs(nodeJSInstallationName: 'node') {
+                    sh 'npm config ls'
+                    sh 'npm test'
+                }
+                
             }
         }
     }
