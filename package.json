@@ -25,6 +25,7 @@
   },
   "modulePathIgnorePatterns": [
       "npm-cache",
-      ".npm"
+      ".npm",
+      ".cache"
     ]
 }
