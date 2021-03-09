@@ -11,19 +11,17 @@ module.exports = function (app) {
     });
 
 
-    app.get("/api/test/all", controller.allAccess);
-
-    app.get("/api/test/user", [authJwt.verifyToken], controller.userBoard);
+    app.get("/api/landing", controller.allAccess);
 
     app.get(
-        "/api/test/mod",
-        [authJwt.verifyToken, authJwt.isModerator],
-        controller.moderatorBoard
+        "/api/organisator/home", 
+        [authJwt.verifyToken, authJwt.isOrganisator], 
+        controller.organisatorHome
     );
 
     app.get(
-        "/api/test/admin",
+        "/api/admin/home",
         [authJwt.verifyToken, authJwt.isAdmin],
-        controller.adminBoard
+        controller.adminHome
     );
 };

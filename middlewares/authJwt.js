@@ -51,7 +51,8 @@ isAdmin = (req, res, next) => {
     })
 }
 
-isModerator = (req, res, next) => {
+
+isOrganisator = (req, res, next) => {
     User.findById(req.userId).exec((err, user) => {
         if (err) {
             res.status(500).send({ message: err })
@@ -69,13 +70,13 @@ isModerator = (req, res, next) => {
                 }
 
                 for (let i = 0; i < roles.length; i++) {
-                    if (roles[i].name === "moderator") {
+                    if (roles[i].name === "organisator") {
                         next()
                         return
                     }
                 }
 
-                res.status(403).send({ message: "Require moderator Role!" })
+                res.status(403).send({ message: "Require Organisator Role!" })
                 return
             }
         )
@@ -85,6 +86,6 @@ isModerator = (req, res, next) => {
 const authJwt = {
     verifyToken,
     isAdmin,
-    isModerator
+    isOrganisator,
 }
 module.exports = authJwt
