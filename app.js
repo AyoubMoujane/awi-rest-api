@@ -2,13 +2,11 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const mongoose = require('mongoose')
+const config = require('./config')
 
 const app = express()
 
-var corsOptions = {
-    // origin: "http://localhost:3000"
-    origin: "http://15.236.140.17:3000"
-};
+var corsOptions = config.corsOptions
 
 app.use(cors(corsOptions))
 
