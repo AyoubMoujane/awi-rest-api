@@ -10,7 +10,7 @@ const Config = function(){
         case 'production':
             return {
                 corsOptions : {
-                    origin: "http://13.36.72.231:3000"
+                    origin: "http://13.36.72.231:5000"
                 }
             };
 
