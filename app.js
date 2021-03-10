@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({
 
 //simple route
 app.get('/', (req, res) => {
-    res.json({message:"Welcome to AWI App"})
+    res.json({message:`Welcome to AWI App ${process.env.NODE_ENV}`})
 })
 // routes
 require('./routes/auth')(app)
