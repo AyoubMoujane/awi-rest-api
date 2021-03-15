@@ -22,19 +22,19 @@ app.use(bodyParser.urlencoded({
 
 //simple route
 app.get('/', (req, res) => {
-    res.json({message:`Welcome to AWI App ${process.env.NODE_ENV}`})
+    res.json({ message: `Welcome to AWI App ${process.env.NODE_ENV}` })
 })
 // routes
-require('./routes/auth')(app)
-require('./routes/user')(app)
+require('./Authentication/routes/auth')(app)
+require('./Application/routes/user')(app)
 
 
 
 // Connect to MongoDB
-const dbConfig = require('./config/db').mongoURI
-const db = require("./models")
+const dbConfigAuth = require('./Authentication/config/db').mongoURI
+const db = require("./Authentication/models")
 
-mongoose.connect(dbConfig,
+mongoose.connect(dbConfigAuth,
     {
         useCreateIndex: true,
         useNewUrlParser: true,
@@ -48,6 +48,16 @@ mongoose.connect(dbConfig,
         console.log("Problems with connection")
         console.error(error)
     })
+
+// Connect to AWS Mysql instance
+/*
+const dbApp = require("./Application/models");
+
+dbApp.sequelize.sync({ force: true }).then(() => {
+    console.log('Drop and Resync Db');
+    initial();
+});
+*/
 
 module.exports = app
 
