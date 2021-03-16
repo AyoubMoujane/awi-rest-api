@@ -1,6 +1,7 @@
-const config = require("../config/db.js");
+const config = require("../config/db");
 
 const Sequelize = require("sequelize");
+
 const sequelize = new Sequelize(
     config.DB,
     config.USER,
@@ -23,5 +24,15 @@ const db = {};
 
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
+
+
+/*
+const db = mysql.createConnection({
+    host: config.HOST,
+    user: config.DB,
+    password: config.PASSWORD
+
+});
+*/
 
 module.exports = db;

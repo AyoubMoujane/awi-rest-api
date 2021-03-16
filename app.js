@@ -32,8 +32,6 @@ require('./Application/routes/user')(app)
 
 // Connect to MongoDB
 const dbConfigAuth = require('./Authentication/config/db').mongoURI
-const db = require("./Authentication/models")
-
 mongoose.connect(dbConfigAuth,
     {
         useCreateIndex: true,
@@ -50,6 +48,16 @@ mongoose.connect(dbConfigAuth,
     })
 
 // Connect to AWS Mysql instance
+const dbConfigApp = require('./Application/models')
+
+
+
+try {
+    dbConfigApp.sequelize.authenticate();
+    console.log('Connection has been established successfully.');
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+}
 
 
 

@@ -11,16 +11,16 @@ module.exports = function (app) {
     });
 
 
-    app.get("/api/app/landing", controller.allAccess);
+    app.get("/api/landing", controller.allAccess);
 
     app.get(
-        "/api/app/organisator/home", 
+        "/api/organisator/home", 
         [authJwt.verifyToken, authJwt.isOrganisator], 
         controller.organisatorHome
     );
 
     app.get(
-        "/api/app/admin/home",
+        "/api/admin/home",
         [authJwt.verifyToken, authJwt.isAdmin],
         controller.adminHome
     );
