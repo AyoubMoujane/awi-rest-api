@@ -1,5 +1,5 @@
 module.exports = {
-    HOST: "ec2-52-47-104-146.eu-west-3.compute.amazonaws.com",
+    HOST: "festival-instance-db.cdx53j5ivoeh.eu-west-3.rds.amazonaws.com",
     USER: "admin",
     PASSWORD: "Polytech",
     DB: "FestivalDuJeu",

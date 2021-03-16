@@ -50,14 +50,8 @@ mongoose.connect(dbConfigAuth,
     })
 
 // Connect to AWS Mysql instance
-/*
-const dbApp = require("./Application/models");
 
-dbApp.sequelize.sync({ force: true }).then(() => {
-    console.log('Drop and Resync Db');
-    initial();
-});
-*/
+
 
 module.exports = app
 
