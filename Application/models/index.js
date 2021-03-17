@@ -32,6 +32,11 @@ db.espace = require("../models/espace")(sequelize, Sequelize)
 db.participant = require("../models/participant")(sequelize, Sequelize)
 db.contact = require("../models/contact")(sequelize, Sequelize)
 
+db.participant.hasMany(db.contact, { as: "contact"})
+db.contact.belongsTo(db.participant, {
+    foreignKey: "participant"
+})
+
 
 
 module.exports = db;
