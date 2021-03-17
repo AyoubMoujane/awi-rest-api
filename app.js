@@ -31,8 +31,9 @@ require('./Application/routes/user')(app)
 
 
 // Connect to MongoDB
-const dbConfigAuth = require('./Authentication/config/db').mongoURI
-mongoose.connect(dbConfigAuth,
+
+const dbAuth = require('./Authentication/config/db').mongoURI
+mongoose.connect(dbAuth,
     {
         useCreateIndex: true,
         useNewUrlParser: true,
@@ -48,15 +49,28 @@ mongoose.connect(dbConfigAuth,
     })
 
 // Connect to AWS Mysql instance
-const dbConfigApp = require('./Application/models')
+const dbApp = require('./Application/models')
 
+const Participant = dbApp.participant
 
+async function connect(){
+    try {
+        await dbApp.sequelize.sync();
+        console.log('Successfully connected to MySql');
+        initial();
+    } catch (error) {
+        console.error('Unable to connect to the database:', error);
+    }
+}
 
-try {
-    dbConfigApp.sequelize.authenticate();
-    console.log('Successfully connected to MySql');
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
+connect()
+
+function initial() {
+    Participant.create({
+        nomParticipant: "Perrin",
+        prenomParticipant: "Pierre",
+        editeurSeulement: true
+    })
 }
 
 

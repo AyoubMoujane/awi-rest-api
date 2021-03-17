@@ -26,13 +26,12 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 
-/*
-const db = mysql.createConnection({
-    host: config.HOST,
-    user: config.DB,
-    password: config.PASSWORD
+// Set up our model
+db.zone = require("../models/zone")(sequelize, Sequelize)
+db.espace = require("../models/espace")(sequelize, Sequelize)
+db.participant = require("../models/participant")(sequelize, Sequelize)
+db.contact = require("../models/contact")(sequelize, Sequelize)
 
-});
-*/
+
 
 module.exports = db;
