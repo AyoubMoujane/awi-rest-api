@@ -40,7 +40,7 @@ mongoose.connect(dbConfigAuth,
     }
 )
     .then(() => {
-        console.log('Successfully connected')
+        console.log('Successfully connected to MongoDB')
     })
     .catch((error) => {
         console.log("Problems with connection")
@@ -54,7 +54,7 @@ const dbConfigApp = require('./Application/models')
 
 try {
     dbConfigApp.sequelize.authenticate();
-    console.log('Connection has been established successfully.');
+    console.log('Successfully connected to MySql');
   } catch (error) {
     console.error('Unable to connect to the database:', error);
 }
