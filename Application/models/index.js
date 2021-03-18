@@ -31,16 +31,18 @@ db.sequelize = sequelize;
 
 db.zone = require("../models/zone")(sequelize, Sequelize)
 db.espace = require("../models/espace")(sequelize, Sequelize)
-//db.espaceType = require("../models/espaceType")(sequelize, Sequelize)
+db.espaceType = require("../models/espaceType")(sequelize, Sequelize)
 db.participant = require("../models/participant")(sequelize, Sequelize)
 db.contact = require("../models/contact")(sequelize, Sequelize)
-//db.jeu = require("../models/jeu")(sequelize, Sequelize)
-//db.jeuType = require("../models/jeuType")(sequelize, Sequelize)
-//db.facture = require("../models/facture")(sequelize, Sequelize)
-//db.reservation = require("../models/reservation")(sequelize, Sequelize)
-//db.festival = require("../models/festival")(sequelize, Sequelize)
-//db.exposantStatus = require("../models/exposantStatus")(sequelize, Sequelize)
-
+db.jeu = require("../models/jeu")(sequelize, Sequelize)
+db.jeuType = require("../models/jeuType")(sequelize, Sequelize)
+db.facture = require("../models/facture")(sequelize, Sequelize)
+db.reservation = require("../models/reservation")(sequelize, Sequelize)
+db.festival = require("../models/festival")(sequelize, Sequelize)
+db.exposantStatus = require("../models/exposantStatus")(sequelize, Sequelize)
+db.exposantSuivi = require("../models/exposantSuivi")(sequelize, Sequelize)
+db.jeuExpose = require("../models/jeuExpose")(sequelize, Sequelize)
+db.reservationEspace = require("../models/reservationEspace")(sequelize, Sequelize)
 
 
 // Relation One to Many
@@ -51,42 +53,73 @@ db.contact.belongsTo(db.participant, {
     as: "Participant",
 })
 
-/*
 db.festival.hasMany(db.reservation, { as: "reservations"})
 db.reservation.belongsTo(db.festival, {
     foreignKey: "festival",
     as: "Festival",
 })
-*/
+
 
 
 
 // Relation One to One
-/*
-db.reservation.hasOne(db.facture, {
-    foreignKey: 'reservation'
-})
-db.facture.belongsTo(db.reservation)
-*/
-
-/*
 db.participant.hasOne(db.reservation, {
-    foreignKey: 'participant'
+    foreignKey: 'participantReservation'
 })
 db.reservation.belongsTo(db.participant)
 
-*/
+
+db.reservation.hasOne(db.facture, {
+    foreignKey: 'reservation',
+})
+db.facture.belongsTo(db.reservation)
+
+
 
 
 // Relation Many to Many
-/*
 db.festival.belongsToMany(db.participant, {
-    through: "SuiviExposant",
-    as: ""
+    through: db.exposantSuivi,
+    as: "participants",
+    foreignKey: "idFestival"
+})
+
+db.participant.belongsToMany(db.festival, {
+    through: db.exposantSuivi,
+    as: "festivals",
+    foreignKey: "idParticipant"
+})
+
+db.jeu.belongsToMany(db.reservation, {
+    through: db.jeuExpose,
+    as: "reservations",
+    foreignKey: "idJeu"
+})
+
+db.reservation.belongsToMany(db.jeu, {
+    through: db.jeuExpose,
+    as: "jeux",
+    foreignKey: "idReservation"
 })
 
 
-*/
+db.espace.belongsToMany(db.reservation, {
+    through: db.reservationEspace,
+    as: "reservations",
+    foreignKey: "idEspace"
+})
+
+db.reservation.belongsToMany(db.espace, {
+    through: db.reservationEspace,
+    as: "espaces",
+    foreignKey: "idReservation"
+})
+
+
+
+
+
+
 
 
 

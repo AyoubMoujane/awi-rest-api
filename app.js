@@ -48,13 +48,15 @@ mongoose.connect(dbAuth,
         console.error(error)
     })
 
+
+
+
 // Connect to AWS Mysql instance
 const dbApp = require('./Application/models')
 
-const Participant = dbApp.participant
-const Contact = dbApp.contact
+const EspaceType = dbApp.espaceType
 
-async function connect(){
+async function connect() {
     try {
         await dbApp.sequelize.sync();
         console.log('Successfully connected to MySql');
@@ -67,26 +69,31 @@ async function connect(){
 connect()
 
 function initial() {
-    Participant.create({
-        nomParticipant: "Perrin",
-        prenomParticipant: "Pierre",
-        editeurSeulement: true
+
+    /*
+        Facture.create({
+            dateEmissionFacture: "2021-06-24",
+            datePaiementFacture: "2021-06-24",
+            reservation: 3
+        })
+       */
+
+
+       EspaceType.create({
+           nomEspace: "EDEEDED",
+       })
+
+    /*
+    Reservation.create({
+        dateReservation: "2021-06-24",
+        prix: 180.69,
+        remise: 25.60,
+        factureEnvoye: true,
+        facture:1,
+        festival:3,
+        participantReservation: 2
     })
-    
-    Contact.create({
-        nomContact: "Moujane",
-        prenomContact: "Ayoub",
-        emailContact: "ayoub.moujane@etu.umontpellier.fr",
-        rue: "xxx rue xww",
-        cp: "34000",
-        ville: "Montpellier",
-        pays: "France",
-        telContact: "0666666666",
-        telBureau: "04444444",
-        fonctionContact: "cadre",
-        estPrincipal: true,
-        participant: 1
-    })
+    */
 
 }
 

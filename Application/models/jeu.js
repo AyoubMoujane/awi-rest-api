@@ -10,15 +10,15 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false
         },
         nbJoueurMin: {
-            type: Sequelize.INT,
+            type: Sequelize.INTEGER,
             allowNull: false
         },
         nbJoueurMax: {
-            type: Sequelize.INT,
+            type: Sequelize.INTEGER,
             allowNull: false
         },
         age: {
-            type: Sequelize.INT,
+            type: Sequelize.INTEGER,
             allowNull: false
         },
         duree: {

@@ -1,13 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
     const JeuExpose = sequelize.define("JeuExpose", {
-        idReservation: {
-            type: Sequelize.INTEGER,
-            primaryKey: true,
-        },
-        idJeu: {
-            type: Sequelize.INTEGER,
-            primaryKey: true,
-        },
         quantiteExpose: {
             type: Sequelize.INTEGER,
             allowNull: false
@@ -40,6 +32,10 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.BOOLEAN,
             allowNull: false
         },
+        zone: {
+            type: Sequelize.INTEGER,
+            foreignKey: true,
+        }
 
     }, {
         tableName: 'JeuExpose',

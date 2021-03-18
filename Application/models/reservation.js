@@ -6,7 +6,7 @@ module.exports = (sequelize, Sequelize) => {
             autoIncrement: true
         },
         dateReservation: {
-            type: Sequelize.DATETIME,
+            type: Sequelize.DATE,
             allowNull: false
         },
         prix: {

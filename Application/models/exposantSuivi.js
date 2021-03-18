@@ -1,13 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
     const ExposantSuivi = sequelize.define("SuiviExposant", {
-        idFestival: {
-            type: Sequelize.INTEGER,
-            primaryKey: true,
-        },
-        idParticipant: {
-            type: Sequelize.INTEGER,
-            primaryKey: true,
-        },
         reponse: {
             type: Sequelize.INTEGER,
             allowNull: false
@@ -25,15 +17,15 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false
         },
         premierContact: {
-            type: Sequelize.DATETIME,
+            type: Sequelize.DATE,
             allowNull: false
         },
         secondContact: {
-            type: Sequelize.DATETIME,
+            type: Sequelize.DATE,
             allowNull: false
         },
         troisiemeContact: {
-            type: Sequelize.DATETIME,
+            type: Sequelize.DATE,
             allowNull: false
         },
 

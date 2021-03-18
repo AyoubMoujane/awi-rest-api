@@ -10,7 +10,7 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false
         },
     }, {
-        tableName: 'EspaceType',
+        tableName: 'TypeEspace',
         createdAt: false,
         updatedAt: false
     });

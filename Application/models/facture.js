@@ -6,11 +6,11 @@ module.exports = (sequelize, Sequelize) => {
             autoIncrement: true
         },
         dateEmissionFacture: {
-            type: Sequelize.DATETIME,
+            type: Sequelize.DATE,
             allowNull: false
         },
         datePaiementFacture: {
-            type: Sequelize.DATETIME,
+            type: Sequelize.DATE,
             allowNull: false
         },
 
