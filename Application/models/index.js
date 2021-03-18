@@ -59,6 +59,12 @@ db.reservation.belongsTo(db.festival, {
     as: "Festival",
 })
 
+db.zone.hasMany(db.jeuExpose, { as: "jeux"})
+db.jeuExpose.belongsTo(db.zone, {
+    foreignKey: "zone",
+    as: "Zone",
+})
+
 
 
 

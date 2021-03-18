@@ -76,23 +76,6 @@ function initial() {
             datePaiementFacture: "2021-06-24",
             reservation: 3
         })
-       */
-
-
-       EspaceType.create({
-           nomEspace: "EDEEDED",
-       })
-
-    /*
-    Reservation.create({
-        dateReservation: "2021-06-24",
-        prix: 180.69,
-        remise: 25.60,
-        factureEnvoye: true,
-        facture:1,
-        festival:3,
-        participantReservation: 2
-    })
     */
 
 }
