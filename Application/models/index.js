@@ -84,6 +84,8 @@ db.festival.belongsToMany(db.participant, {
     through: "SuiviExposant",
     as: ""
 })
+
+
 */
 
 
