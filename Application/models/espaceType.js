@@ -1,23 +1,19 @@
 module.exports = (sequelize, Sequelize) => {
-    const Participant = sequelize.define("Participant", {
-        idParticipant: {
+    const EspaceType = sequelize.define("TypeEspace", {
+        idTypeEspace: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        nomParticipant: {
+        nomEspace: {
             type: Sequelize.STRING,
             allowNull: false
         },
-        editeurSeulement: {
-            type: Sequelize.BOOLEAN,
-            allowNull: false
-        },
     }, {
-        tableName: 'Participant',
+        tableName: 'EspaceType',
         createdAt: false,
         updatedAt: false
     });
 
-    return Participant;
+    return EspaceType;
 };

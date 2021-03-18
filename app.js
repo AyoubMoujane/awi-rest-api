@@ -52,6 +52,7 @@ mongoose.connect(dbAuth,
 const dbApp = require('./Application/models')
 
 const Participant = dbApp.participant
+const Contact = dbApp.contact
 
 async function connect(){
     try {
@@ -71,6 +72,22 @@ function initial() {
         prenomParticipant: "Pierre",
         editeurSeulement: true
     })
+    
+    Contact.create({
+        nomContact: "Moujane",
+        prenomContact: "Ayoub",
+        emailContact: "ayoub.moujane@etu.umontpellier.fr",
+        rue: "xxx rue xww",
+        cp: "34000",
+        ville: "Montpellier",
+        pays: "France",
+        telContact: "0666666666",
+        telBureau: "04444444",
+        fonctionContact: "cadre",
+        estPrincipal: true,
+        participant: 1
+    })
+
 }
 
 
