@@ -1,4 +1,5 @@
-const Participant = require("../models/participant")
+const db = require("../models")
+const Participant = db.participant
 
 exports.findAll = (req, res) => {
     Participant.findAll()
