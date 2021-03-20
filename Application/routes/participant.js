@@ -1,5 +1,4 @@
-const { verifySignUp } = require("../../Authentication/middlewares")
-const controller = require("../controllers/participant")
+const controller = require("../controllers/participant");
 
 module.exports = function (app) {
     app.use(function (req, res, next) {
@@ -10,6 +9,6 @@ module.exports = function (app) {
         next();
     });
 
-    app.get("/api/participants", controller.getAllParticipants);
+    app.get("/api/participants", controller.findAll);
 
-};
+}

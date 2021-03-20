@@ -1,17 +1,14 @@
-var mysql = require('mysql'); 
-const db;
+const Participant = require("../models/participant")
 
-exports.getAllParticipants = (req, res) => {
-    let sql = "SELECT * FROM Participant"
-
-    // TODO : update to materialize
-
-    db.query(sql, function (err, result) {
-        if (err) {
-            res.status(500).send({ message: err })
-            return
-    };
-        console.log("Result: " + result);
-        res.status(200).send({ participants: result })
-  });
-}
+exports.findAll = (req, res) => {
+    Participant.findAll()
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving participants."
+            });
+        });
+};
