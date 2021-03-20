@@ -65,6 +65,20 @@ db.jeuExpose.belongsTo(db.zone, {
     as: "Zone",
 })
 
+// TO DO : check si ça fait pas d'erreur
+
+//db.jeuType.hasMany(db.jeu, { as: "jeux"})
+db.jeu.belongsTo(db.jeuType, {
+    foreignKey: "type",
+    as: "TypeJeu",
+})
+
+//db.participant.hasMany(db.jeu, { as: "jeux"})
+db.jeu.belongsTo(db.participant, {
+    foreignKey: "editeur",
+    as: "Participant",
+})
+
 
 
 

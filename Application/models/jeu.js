@@ -32,11 +32,7 @@ module.exports = (sequelize, Sequelize) => {
         prototype: {
             type: Sequelize.BOOLEAN,
             allowNull: false
-        },
-        estCourant: {
-            type: Sequelize.BOOLEAN,
-            allowNull: false
-        },
+        }
 
     }, {
         tableName: 'Jeu',
