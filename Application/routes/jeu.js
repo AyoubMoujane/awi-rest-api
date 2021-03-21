@@ -11,7 +11,7 @@ module.exports = function (app) {
 
     //Retrieve all Jeux
     router.get("/", 
-    [authJwt.verifyToken],
+    // [authJwt.verifyToken],
     controller.findAll)
 
     //Retrieve a single Jeux with id

@@ -99,9 +99,7 @@ exports.update = (req, res) => {
 
 exports.delete = (req, res) => {
     const id = req.params.id;
-    console.log(id)
-
-    Jeu.destroy({
+    Jeu.destroy(req.body,{
         where: { idJeu: id },
     })
         .then(num => {
