@@ -1,14 +1,27 @@
+const { authJwt } = require("../../Authentication/middlewares");
 const controller = require("../controllers/participant");
 
 module.exports = function (app) {
-    app.use(function (req, res, next) {
-        res.header(
-            "Access-Control-Allow-Headers",
-            "x-access-token, Origin, Content-Type, Accept"
-        );
-        next();
-    });
 
-    app.get("/api/participants", controller.findAll);
+    var router = require("express").Router()
+
+    //Retrieve all participants
+    router.get("/",
+        [authJwt.verifyToken, authJwt.isAdmin],
+        controller.findAll)
+
+    router.post("/:id",
+        // [authJwt.verifyToken, authJwt.isAdmin],
+        controller.delete)
+
+    router.post("/",
+        // [authJwt.verifyToken, authJwt.isAdmin],
+        controller.create)
+
+    router.put("/:id",
+        // [authJwt.verifyToken, authJwt.isAdmin],
+        controller.update)
+
+    app.use('/api/participants', router)
 
 }

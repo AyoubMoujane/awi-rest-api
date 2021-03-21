@@ -30,6 +30,7 @@ require('./Application/routes/user')(app)
 require('./Application/routes/festival')(app)
 require('./Application/routes/jeu')(app)
 require('./Application/routes/espace')(app)
+require('./Application/routes/participant')(app)
 
 
 
