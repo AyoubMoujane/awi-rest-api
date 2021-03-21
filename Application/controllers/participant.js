@@ -17,7 +17,8 @@ exports.findAll = (req, res) => {
 exports.create = (req, res) => {
 
     // Valid request
-    if (!req.body.nomParticipant || !req.body.editeurSeulement) {
+    if (!req.body.nomParticipant || req.body.editeurSeulement == undefined) {
+        console.log("ici")
         res.status(400).send({
             message: "Missing data!"
         });
