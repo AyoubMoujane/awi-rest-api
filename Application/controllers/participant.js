@@ -40,3 +40,26 @@ exports.create = (req, res) => {
             })
         })
 }
+
+exports.delete = (req, res) => {
+
+    let id = req.params.id
+
+    // Valid request
+    if (!id) {
+        res.status(400).send({
+            message: "Missing data!"
+        });
+        return;
+    }
+
+    Participant.destroy({ where: { idParticipant: id } })
+        .then(data => {
+            res.send(data)
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while creating the Participant."
+            })
+        })
+}

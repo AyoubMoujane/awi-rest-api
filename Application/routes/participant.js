@@ -10,9 +10,9 @@ module.exports = function (app) {
         [authJwt.verifyToken, authJwt.isAdmin],
         controller.findAll)
 
-    router.post("/",
+    router.post("/:id",
         // [authJwt.verifyToken, authJwt.isAdmin],
-        controller.create)
+        controller.delete)
 
     app.use('/api/participants', router)
 
