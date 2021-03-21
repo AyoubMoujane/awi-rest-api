@@ -3,21 +3,6 @@ const Festival = db.festival
 const Op = db.Sequelize.Op
 
 exports.create = (req, res) => {
-
-    // Valide request
-    if (!req.body.nomFestival) {
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-        return;
-    }
-    if (!req.body.dateFestival) {
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-        return;
-    }
-
     //Create a festival
     const festival = {
         nomFestival: req.body.nomFestival,
@@ -27,11 +12,14 @@ exports.create = (req, res) => {
 
     Festival.create(festival)
         .then(data => {
-            res.send(data)
+            res.send({
+                data,
+                message: "Votre festival à bien été créé !"
+            })
         })
         .catch(err => {
             res.status(500).send({
-                message: err.message || "Some error occurred while creating the Tutorial."
+                message: err.message || "Echec de la création du festival ..."
             })
         })
 
