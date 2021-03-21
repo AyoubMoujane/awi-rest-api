@@ -18,6 +18,10 @@ module.exports = function (app) {
         // [authJwt.verifyToken, authJwt.isAdmin],
         controller.create)
 
+    router.put("/:id",
+        // [authJwt.verifyToken, authJwt.isAdmin],
+        controller.update)
+
     app.use('/api/participants', router)
 
 }
