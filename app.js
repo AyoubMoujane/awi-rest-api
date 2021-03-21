@@ -28,6 +28,7 @@ app.get('/', (req, res) => {
 require('./Authentication/routes/auth')(app)
 require('./Application/routes/user')(app)
 require('./Application/routes/festival')(app)
+require('./Application/routes/espace')(app)
 
 
 

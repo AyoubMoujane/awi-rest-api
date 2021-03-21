@@ -65,7 +65,17 @@ db.jeuExpose.belongsTo(db.zone, {
     as: "Zone",
 })
 
+db.festival.hasMany(db.espace, { as: "espaces"})
+db.espace.belongsTo(db.festival, {
+    foreignKey: "festivalE",
+    as: "Festival"
+})
 
+db.espaceType.hasMany(db.espace, { as: "esapces"})
+db.espace.belongsTo(db.espaceType, {
+    foreignKey: "typeEspace",
+    as: "TypeEspace"
+})
 
 
 // Relation One to One

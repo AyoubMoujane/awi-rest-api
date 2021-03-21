@@ -1,11 +1,13 @@
 const { authJwt } = require("../../Authentication/middlewares");
 const controller = require("../controllers/festival");
+const festivalMiddlewares = require("../middlewares/festival")
 
 module.exports = function (app) {
     var router = require("express").Router()
 
     //Create a new Festival
     router.post("/",
+    [festivalMiddlewares.checkEmptyField],
     [authJwt.verifyToken, authJwt.isAdmin],
     controller.create)
 
