@@ -1,9 +1,11 @@
 const db = require("../models")
 const Festival = db.festival
+const Espace = db.espace
 const Op = db.Sequelize.Op
 
 exports.create = (req, res) => {
-    //Create a festival
+    
+    //Create a festival with espace
     const festival = {
         nomFestival: req.body.nomFestival,
         dateFestival: req.body.dateFestival,
@@ -12,6 +14,32 @@ exports.create = (req, res) => {
 
     Festival.create(festival)
         .then(data => {
+            const EspaceEntrees = {
+                nbTableMax : req.body.nbTableEntree,
+                prixUnitaireTable : req.body.prixTableEntree,
+                prixM2: req.body.prixM2Entree,
+                festivalE: data.idFestival,
+                typeEspace: 1
+            }
+            const EspaceAccueil = {
+                nbTableMax : req.body.nbTableAccueil,
+                prixUnitaireTable : req.body.prixTableAccueil,
+                prixM2: req.body.prixM2Accueil,
+                festivalE: data.idFestival,
+                typeEspace: 2
+            }
+            const EspaceBuvette = {
+                nbTableMax : req.body.nbTableBuvette,
+                prixUnitaireTable : req.body.prixTableBuvette,
+                prixM2: req.body.prixM2Buvette,
+                festivalE: data.idFestival,
+                typeEspace: 3
+            }
+            Espace.create(EspaceEntrees)
+            Espace.create(EspaceAccueil)
+            Espace.create(EspaceBuvette)
+
+
             res.send({
                 data,
                 message: "Votre festival à bien été créé !"
