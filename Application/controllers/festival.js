@@ -55,7 +55,7 @@ exports.create = (req, res) => {
 
 exports.findAll = (req, res) => {
 
-    Festival.findAll()
+    Festival.findAll({include: [ "espaces" ]})
         .then(data => {
             res.send(data);
         })

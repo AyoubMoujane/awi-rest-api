@@ -79,13 +79,13 @@ db.jeu.belongsTo(db.participant, {
     as: "Participant",
 })
 
-db.festival.hasMany(db.espace, { as: "espaces"})
+db.festival.hasMany(db.espace, { as: "espaces", foreignKey: "festivalE"})
 db.espace.belongsTo(db.festival, {
     foreignKey: "festivalE",
     as: "Festival"
 })
 
-db.espaceType.hasMany(db.espace, { as: "esapces"})
+db.espaceType.hasMany(db.espace, { as: "espaces", foreignKey:"typeEspace" })
 db.espace.belongsTo(db.espaceType, {
     foreignKey: "typeEspace",
     as: "TypeEspace"
