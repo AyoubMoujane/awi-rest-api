@@ -81,13 +81,43 @@ exports.findOne = (req, res) => {
 }
 
 exports.update = (req, res) => {
-    const id = req.params.id;
 
-    Festival.update(req.body, {
-        where: { idFestival: id }
+    const infoFestival = {
+        id : req.params.id,
+        nomFestival: req.body.nomFestival,
+        dateFestival: req.body.dateFestival
+    }
+
+    const infoEspaceEntree = {
+        nbTableMax: req.body.nbTableEntree
+    }
+
+    const infoEspaceAccueil = {
+        nbTableMax: req.body.nbTableAccueil
+    }
+
+    const infoEspaceBuvette = {
+        nbTableMax: req.body.nbTableBuvette
+    }
+
+    Festival.update(infoFestival, {
+        where: { idFestival: infoFestival.id }
     })
         .then(num => {
             if (num == 1) {
+
+                Espace.update(infoEspaceEntree, {
+                    where: {typeEspace: 1, festivalE: infoFestival.id}
+                })
+
+                Espace.update(infoEspaceAccueil, {
+                    where: {typeEspace: 2, festivalE: infoFestival.id}
+                })
+
+                Espace.update(infoEspaceBuvette, {
+                    where: {typeEspace: 3, festivalE: infoFestival.id}
+                })
+
                 res.send({
                     message: "Festival was updated successfully."
                 });
@@ -99,7 +129,7 @@ exports.update = (req, res) => {
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error updating Festival with id=" + id
+                message: err.message || "Error updating Festival with id=" + infoFestival.id
             });
         });
 };
