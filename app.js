@@ -35,6 +35,7 @@ require('./Application/routes/participant')(app)
 
 
 
+
 // Connect to MongoDB
 const dbAuth = require('./Authentication/config/db').mongoURI
 mongoose.connect(dbAuth,

@@ -104,25 +104,25 @@ exports.update = (req, res) => {
 
 
 exports.delete = (req, res) => {
-    const id = req.params.id;
-    Jeu.destroy(req.body,{
-        where: { idJeu: id },
-        truncate: true
-    })
-        .then(num => {
-            if (num == 1) {
-                res.send({
-                    message: "Jeu was deleted successfully."
-                });
-            } else {
-                res.send({
-                    message: `Cannot delete Jeu with id=${id}. Maybe Jeu was not found or req.body is empty!`
-                });
-            }
+
+    let id = req.params.id
+
+    // Valid request
+    if (!id) {
+        res.status(400).send({
+            message: "Missing data!"
+        });
+        return;
+    }
+
+    Jeu.destroy({ where: { idJeu: id } })
+        .then(() => {
+            res.status(204).end()
         })
         .catch(err => {
+            console.log(err)
             res.status(500).send({
-                message: err.message || "Error deleting Jeu with id=" + id
-            });
-        });
-};
+                message: err.message || "Some error occurred while creating the Jeu."
+            })
+        })
+}
