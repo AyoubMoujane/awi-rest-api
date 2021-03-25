@@ -14,6 +14,21 @@ exports.findAll = (req, res) => {
         });
 };
 
+
+// TODO: A modifier 
+exports.findAllExposant = (req, res) => {
+    Participant.findAll()
+    .then(data => {
+        res.send(data);
+    })
+    .catch(err => {
+        res.status(500).send({
+            message:
+                err.message || "Some error occurred while retrieving participants."
+        });
+    });
+}
+
 exports.create = (req, res) => {
 
     // Valid request

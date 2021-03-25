@@ -31,7 +31,7 @@ require('./Application/routes/festival')(app)
 require('./Application/routes/jeu')(app)
 require('./Application/routes/participant')(app)
 require('./Application/routes/zone')(app)
-
+require('./Application/routes/suiviExposant')(app)
 
 // Connect to MongoDB
 const dbAuth = require('./Authentication/config/db').mongoURI
