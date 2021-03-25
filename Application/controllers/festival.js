@@ -1,10 +1,15 @@
 const db = require("../models")
 const Festival = db.festival
 const Espace = db.espace
+const ExposantSuivi = db.exposantSuivi
+const Participant = db.participant
 const Op = db.Sequelize.Op
 
+
 exports.create = (req, res) => {
-    
+
+    const idFestival = null
+
     //Create a festival with espace
     const festival = {
         nomFestival: req.body.nomFestival,
@@ -12,32 +17,68 @@ exports.create = (req, res) => {
         estCourant: req.body.estCourant ? req.body.estCourant : false,
     }
 
+    console.log(festival.nomFestival)
+
     Festival.create(festival)
         .then(data => {
+
+            const idFestival = data.idFestival
+            // création des 3 espaces liées au festival
+
             const EspaceEntrees = {
-                nbTableMax : req.body.nbTableEntree,
-                prixUnitaireTable : req.body.prixTableEntree,
+                nbTableMax: req.body.nbTableEntree,
+                prixUnitaireTable: req.body.prixTableEntree,
                 prixM2: req.body.prixM2Entree,
-                festivalE: data.idFestival,
+                festivalE: idFestival,
                 typeEspace: 1
             }
             const EspaceAccueil = {
-                nbTableMax : req.body.nbTableAccueil,
-                prixUnitaireTable : req.body.prixTableAccueil,
+                nbTableMax: req.body.nbTableAccueil,
+                prixUnitaireTable: req.body.prixTableAccueil,
                 prixM2: req.body.prixM2Accueil,
-                festivalE: data.idFestival,
+                festivalE: idFestival,
                 typeEspace: 2
             }
             const EspaceBuvette = {
-                nbTableMax : req.body.nbTableBuvette,
-                prixUnitaireTable : req.body.prixTableBuvette,
+                nbTableMax: req.body.nbTableBuvette,
+                prixUnitaireTable: req.body.prixTableBuvette,
                 prixM2: req.body.prixM2Buvette,
-                festivalE: data.idFestival,
+                festivalE: idFestival,
                 typeEspace: 3
             }
             Espace.create(EspaceEntrees)
             Espace.create(EspaceAccueil)
             Espace.create(EspaceBuvette)
+
+            // TODO: A modifier
+            // Création d'un suivi pour chaque exposant/editeur
+
+            Participant.findAll()
+                .then(data => {
+                    data.map(participant => {
+
+                        const exposantSuivi = {
+                            idFestival: idFestival,
+                            idParticipant: participant.idParticipant,
+                            reponse: 0,
+                            commentaires: "Aucun",
+                            jeuxRentres: false,
+                            besoinBenevol: false,
+                            premierContact: Date.now(),
+                            secondContact: Date.now(),
+                            troisiemeContact: Date.now()
+                        }
+
+                        ExposantSuivi.create(exposantSuivi)
+
+                    })
+                })
+                .catch(err => {
+                    res.status(500).send({
+                        message:
+                            err.message || "Some error occurred while retrieving participants."
+                    });
+                });
 
 
             res.send({
@@ -55,7 +96,7 @@ exports.create = (req, res) => {
 
 exports.findAll = (req, res) => {
 
-    Festival.findAll({include: [ "espaces" ]})
+    Festival.findAll({ include: ["espaces"] })
         .then(data => {
             res.send(data);
         })
@@ -81,13 +122,47 @@ exports.findOne = (req, res) => {
 }
 
 exports.update = (req, res) => {
-    const id = req.params.id;
 
-    Festival.update(req.body, {
-        where: { idFestival: id }
+    const infoFestival = {
+        id: req.params.id,
+        nomFestival: req.body.nomFestival,
+        dateFestival: req.body.dateFestival
+    }
+
+    const infoEspaceEntree = {
+        nbTableMax: req.body.nbTableEntree
+    }
+
+    const infoEspaceAccueil = {
+        nbTableMax: req.body.nbTableAccueil
+    }
+
+    const infoEspaceBuvette = {
+        nbTableMax: req.body.nbTableBuvette
+    }
+
+    Festival.update(infoFestival, {
+        where: { idFestival: infoFestival.id }
     })
         .then(num => {
             if (num == 1) {
+
+
+                Espace.update(infoEspaceEntree, {
+                    where: { typeEspace: 1, festivalE: infoFestival.id }
+                })
+
+                Espace.update(infoEspaceAccueil, {
+                    where: { typeEspace: 2, festivalE: infoFestival.id }
+                })
+
+                Espace.update(infoEspaceBuvette, {
+                    where: { typeEspace: 3, festivalE: infoFestival.id }
+                })
+
+
+
+
                 res.send({
                     message: "Festival was updated successfully."
                 });
@@ -99,7 +174,7 @@ exports.update = (req, res) => {
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error updating Festival with id=" + id
+                message: err.message || "Error updating Festival with id=" + infoFestival.id
             });
         });
 };

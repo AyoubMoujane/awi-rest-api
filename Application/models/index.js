@@ -47,19 +47,19 @@ db.reservationEspace = require("../models/reservationEspace")(sequelize, Sequeli
 
 // Relation One to Many
 
-db.participant.hasMany(db.contact, { as: "contacts"})
+db.participant.hasMany(db.contact, { as: "contacts", foreignKey: "participant"})
 db.contact.belongsTo(db.participant, {
     foreignKey: "participant",
     as: "Participant",
 })
 
-db.festival.hasMany(db.reservation, { as: "reservations"})
+db.festival.hasMany(db.reservation, { as: "reservations", foreignKey: "festival"})
 db.reservation.belongsTo(db.festival, {
     foreignKey: "festival",
     as: "Festival",
 })
 
-db.zone.hasMany(db.jeuExpose, { as: "jeux"})
+db.zone.hasMany(db.jeuExpose, { as: "jeux", foreignKey: "zone"})
 db.jeuExpose.belongsTo(db.zone, {
     foreignKey: "zone",
     as: "Zone",
