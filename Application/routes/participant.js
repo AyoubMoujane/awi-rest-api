@@ -10,7 +10,7 @@ module.exports = function (app) {
         [authJwt.verifyToken, authJwt.isAdmin],
         controller.findAll)
 
-    router.post("/:id",
+    router.delete("/:id",
         // [authJwt.verifyToken, authJwt.isAdmin],
         controller.delete)
 

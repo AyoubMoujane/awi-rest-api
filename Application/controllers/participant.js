@@ -55,9 +55,11 @@ exports.delete = (req, res) => {
 
     Participant.destroy({ where: { idParticipant: id } })
         .then(data => {
-            res.sendStatus(data)
+            console.log(data)
+            res.status(204).send(data)
         })
         .catch(err => {
+            console.log(err)
             res.status(500).send({
                 message: err.message || "Some error occurred while creating the Participant."
             })
