@@ -54,7 +54,6 @@ mongoose.connect(dbAuth,
 // Connect to AWS Mysql instance
 const dbApp = require('./Application/models')
 
-const EspaceType = dbApp.espaceType
 
 async function connect() {
     try {

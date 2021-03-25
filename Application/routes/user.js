@@ -7,17 +7,17 @@ module.exports = function (app) {
     router.get("/landing", controller.allAccess);
 
 
-    router.get(
-        "/organisator/home", 
-        [authJwt.verifyToken, authJwt.isOrganisator], 
-        controller.organisatorHome
-    );
+    // router.get(
+    //     "/organisator/home", 
+    //     [authJwt.verifyToken, authJwt.isOrganisator], 
+    //     controller.organisatorHome
+    // );
 
-    router.get(
-        "/admin/home",
-        [authJwt.verifyToken, authJwt.isAdmin],
-        controller.adminHome
-    );
+    // router.get(
+    //     "/admin/home",
+    //     [authJwt.verifyToken, authJwt.isAdmin],
+    //     controller.adminHome
+    // );
 
     router.get(
         "/admin/organisators",

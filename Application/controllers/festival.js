@@ -123,8 +123,9 @@ exports.findOne = (req, res) => {
 
 exports.update = (req, res) => {
 
+    const id = req.params.id
+
     const infoFestival = {
-        id: req.params.id,
         nomFestival: req.body.nomFestival,
         dateFestival: req.body.dateFestival
     }
@@ -142,22 +143,22 @@ exports.update = (req, res) => {
     }
 
     Festival.update(infoFestival, {
-        where: { idFestival: infoFestival.id }
+        where: { idFestival: id }
     })
         .then(num => {
             if (num == 1) {
 
 
                 Espace.update(infoEspaceEntree, {
-                    where: { typeEspace: 1, festivalE: infoFestival.id }
+                    where: { typeEspace: 1, festivalE: id }
                 })
 
                 Espace.update(infoEspaceAccueil, {
-                    where: { typeEspace: 2, festivalE: infoFestival.id }
+                    where: { typeEspace: 2, festivalE: id }
                 })
 
                 Espace.update(infoEspaceBuvette, {
-                    where: { typeEspace: 3, festivalE: infoFestival.id }
+                    where: { typeEspace: 3, festivalE: id }
                 })
 
 
