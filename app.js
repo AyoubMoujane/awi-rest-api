@@ -30,7 +30,7 @@ require('./Application/routes/user')(app)
 require('./Application/routes/festival')(app)
 require('./Application/routes/jeu')(app)
 require('./Application/routes/participant')(app)
-
+require('./Application/routes/zone')(app)
 
 
 // Connect to MongoDB

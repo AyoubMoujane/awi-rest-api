@@ -61,10 +61,33 @@ checkPassword = (req, res, next) => {
     next()
 }
 
+checkEmptyField = (req, res, next) => {
+    if (!req.body.username) {
+        res.status(400).send({ message: "Veuillez remplir le nom d'utilisateur svp !" });
+        return;
+    }
+    if (!req.body.email) {
+        res.status(400).send({ message: "Veuillez remplir l'email svp !" });
+        return;
+    }
+    if (!req.body.password) {
+        res.status(400).send({ message: "Veuillez remplir le mot de passe svp !" });
+        return;
+    }
+    if (!req.body.password2) {
+        res.status(400).send({ message: "Veuillez confirmé le mot de passe svp !" });
+        return;
+    }
+
+    next()
+
+}
+
 const verifySignUp = {
     checkDuplicateUsernameOrEmail,
     checkRolesExisted,
-    checkPassword
+    checkPassword,
+    checkEmptyField
 }
 
 module.exports = verifySignUp
