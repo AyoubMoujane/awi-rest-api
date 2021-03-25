@@ -21,12 +21,12 @@ module.exports = function (app) {
 
     //Update a Jeu with id
     router.put("/:id",
-    [authJwt.verifyToken],
+    // [authJwt.verifyToken],
     controller.update)
 
     //Delete a Jeu with id
     router.delete("/:id",
-    [authJwt.verifyToken],
+    //[authJwt.verifyToken],
     controller.delete)
 
     app.use('/api/jeux', router)

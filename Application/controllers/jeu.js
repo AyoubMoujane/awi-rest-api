@@ -1,6 +1,9 @@
 const db = require("../models")
 const Jeu = db.jeu
 const Op = db.Sequelize.Op
+const participant = db.participant
+const jeuType = db.jeuType
+
 
 exports.create = (req, res) => {
 
@@ -40,6 +43,7 @@ exports.create = (req, res) => {
             res.status(500).send({
                 message: err.message || "Some error occurred while creating the Game."
             })
+            console.log(err.message)
         })
     
 
@@ -48,7 +52,9 @@ exports.create = (req, res) => {
 
 exports.findAll = (req, res) => {
 
-    Jeu.findAll()
+    Jeu.findAll({
+        include: [{ model: participant, as: 'participant' },{ model: jeuType, as: 'jeuType' }]
+    })
         .then(data => {
             res.send(data);
         })
@@ -98,24 +104,25 @@ exports.update = (req, res) => {
 
 
 exports.delete = (req, res) => {
-    const id = req.params.id;
-    Jeu.destroy(req.body,{
-        where: { idJeu: id },
-    })
-        .then(num => {
-            if (num == 1) {
-                res.send({
-                    message: "Jeu was deleted successfully."
-                });
-            } else {
-                res.send({
-                    message: `Cannot delete Jeu with id=${id}. Maybe Jeu was not found or req.body is empty!`
-                });
-            }
+
+    let id = req.params.id
+
+    // Valid request
+    if (!id) {
+        res.status(400).send({
+            message: "Missing data!"
+        });
+        return;
+    }
+
+    Jeu.destroy({ where: { idJeu: id } })
+        .then(() => {
+            res.status(204).end()
         })
         .catch(err => {
+            console.log(err)
             res.status(500).send({
-                message: err.message || "Error deleting Jeu with id=" + id
-            });
-        });
-};
+                message: err.message || "Some error occurred while creating the Jeu."
+            })
+        })
+}
