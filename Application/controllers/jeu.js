@@ -1,6 +1,9 @@
 const db = require("../models")
 const Jeu = db.jeu
 const Op = db.Sequelize.Op
+const participant = db.participant
+const jeuType = db.jeuType
+
 
 exports.create = (req, res) => {
 
@@ -40,6 +43,7 @@ exports.create = (req, res) => {
             res.status(500).send({
                 message: err.message || "Some error occurred while creating the Game."
             })
+            console.log(err.message)
         })
     
 
@@ -48,7 +52,9 @@ exports.create = (req, res) => {
 
 exports.findAll = (req, res) => {
 
-    Jeu.findAll()
+    Jeu.findAll({
+        include: [{ model: participant, as: 'participant' },{ model: jeuType, as: 'jeuType' }]
+    })
         .then(data => {
             res.send(data);
         })
@@ -101,6 +107,7 @@ exports.delete = (req, res) => {
     const id = req.params.id;
     Jeu.destroy(req.body,{
         where: { idJeu: id },
+        truncate: true
     })
         .then(num => {
             if (num == 1) {

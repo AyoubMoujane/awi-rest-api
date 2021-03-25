@@ -3,12 +3,14 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const mongoose = require('mongoose')
 const config = require('./config')
+const morgan = require('morgan')
 
 const app = express()
 
 var corsOptions = config.corsOptions
 
 app.use(cors(corsOptions))
+app.use(morgan("dev"))
 
 // Bodyparser middleware
 // parse requests of content-type - application/json
