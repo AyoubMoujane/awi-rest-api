@@ -123,11 +123,15 @@ exports.findOne = (req, res) => {
 
 exports.update = (req, res) => {
 
+    console.log(req.body)
+
     const id = req.params.id
 
     const infoFestival = {
         nomFestival: req.body.nomFestival,
-        dateFestival: req.body.dateFestival
+        dateFestival: req.body.dateFestival,
+        estCourant: req.body.estCourant
+
     }
 
     const infoEspaceEntree = {
@@ -148,7 +152,6 @@ exports.update = (req, res) => {
         .then(num => {
             if (num == 1) {
 
-
                 Espace.update(infoEspaceEntree, {
                     where: { typeEspace: 1, festivalE: id }
                 })
@@ -161,14 +164,11 @@ exports.update = (req, res) => {
                     where: { typeEspace: 3, festivalE: id }
                 })
 
-
-
-
                 res.send({
                     message: "Festival was updated successfully."
                 });
             } else {
-                res.send({
+                res.status(400).send({
                     message: `Cannot update Festival with id=${id}. Maybe Festival was not found or req.body is empty!`
                 });
             }
