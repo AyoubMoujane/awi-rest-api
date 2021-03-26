@@ -21,10 +21,10 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.BOOLEAN,
             allowNull: false
         },
-        facture: {
-            type: Sequelize.INTEGER,
-            allowNull: false
-        },
+        // facture: {
+        //     type: Sequelize.INTEGER,
+        //     allowNull: false
+        // },
         
     }, {
         tableName: 'Reservation',

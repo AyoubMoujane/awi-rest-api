@@ -94,9 +94,13 @@ db.espace.belongsTo(db.espaceType, {
 
 // Relation One to One
 db.participant.hasOne(db.reservation, {
+    as: "participantReservation",
     foreignKey: 'participantReservation'
 })
-db.reservation.belongsTo(db.participant)
+db.reservation.belongsTo(db.participant, {
+    foreignKey: "participantReservation",
+    as: "Participant"
+})
 
 
 db.reservation.hasOne(db.facture, {
