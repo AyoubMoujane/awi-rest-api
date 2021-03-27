@@ -150,7 +150,6 @@ exports.update = (req, res) => {
         where: { idFestival: id }
     })
         .then(num => {
-            // if (num == 1) {
 
             Espace.update(infoEspaceEntree, {
                 where: { typeEspace: 1, festivalE: id }
@@ -167,11 +166,7 @@ exports.update = (req, res) => {
             res.send({
                 message: "Festival was updated successfully."
             });
-            // } else {
-            //     res.status(400).send({
-            //         message: `Cannot update Festival with id=${id}. Maybe Festival was not found or req.body is empty!`
-            //     });
-            // }
+
         })
         .catch(err => {
             res.status(500).send({
@@ -179,6 +174,36 @@ exports.update = (req, res) => {
             });
         });
 };
+
+exports.switchCurrentFestival = async (req, res) => {
+
+    const previousCurrentFestival = req.body.previousCurrentFestival
+    const newCurrentFestival = req.body.newCurrentFestival
+
+    try {
+
+        const result = await sequelize.transaction(async (t) => {
+
+            await Festival.update(newCurrentFestival, {
+                where: { idFestival: newCurrentFestival.idFestival }
+            })
+
+            await Festival.update(previousCurrentFestival, {
+                where: { idFestival: previousCurrentFestival.idFestival }
+            })
+
+            return user;
+
+        });
+
+        res.status(200).send({ message: "Updated festival successfully" })
+
+    } catch (error) {
+        res.status(500).send({
+            message: error.message || "Error updating Festival"
+        });
+    }
+}
 
 
 exports.delete = (req, res) => {

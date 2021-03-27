@@ -7,31 +7,36 @@ module.exports = function (app) {
 
     //Create a new Festival
     router.post("/",
-    [festivalMiddlewares.checkEmptyField],
-    [authJwt.verifyToken, authJwt.isAdmin],
-    controller.create)
+        [festivalMiddlewares.checkEmptyField],
+        [authJwt.verifyToken, authJwt.isAdmin],
+        controller.create)
 
     //Retrieve all Festivals
-    router.get("/", 
-    [authJwt.verifyToken, authJwt.isAdmin],
-    controller.findAll)
+    router.get("/",
+        // [authJwt.verifyToken, authJwt.isAdmin],
+        controller.findAll)
 
     //Retrieve a single Festival with id
     router.get("/:id",
-    [authJwt.verifyToken, authJwt.isAdmin],
-    controller.findOne)
+        [authJwt.verifyToken, authJwt.isAdmin],
+        controller.findOne)
 
     //Update a Festival with id
     router.put("/:id",
-    [authJwt.verifyToken, authJwt.isAdmin],
-    controller.update)
+        [authJwt.verifyToken, authJwt.isAdmin],
+        controller.update)
+
+    //Update a Festival with id
+    router.put("/switchCurrent",
+        [authJwt.verifyToken, authJwt.isAdmin],
+        controller.switchCurrentFestival)
 
     //Delete a Festival with id
     router.delete("/:id",
-    [authJwt.verifyToken, authJwt.isAdmin],
-    controller.delete)
+        [authJwt.verifyToken, authJwt.isAdmin],
+        controller.delete)
 
-    
+
 
     app.use('/api/festivals', router)
 
