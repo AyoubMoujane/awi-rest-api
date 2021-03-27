@@ -27,7 +27,7 @@ module.exports = function (app) {
         controller.update)
 
     //Update a Festival with id
-    router.put("/switchCurrent",
+    router.put("/custom/switchCurrent",
         [authJwt.verifyToken, authJwt.isAdmin],
         controller.switchCurrentFestival)
 

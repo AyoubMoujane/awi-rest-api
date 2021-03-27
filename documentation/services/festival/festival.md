@@ -4,7 +4,7 @@ Returns json data about a single user.
 
 - **URL**
 
-  /api/festivals/switchCurrent
+  /api/festivals/custom/switchCurrent
 
 - **Method:**
 

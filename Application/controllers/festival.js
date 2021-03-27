@@ -5,6 +5,8 @@ const ExposantSuivi = db.exposantSuivi
 const Participant = db.participant
 const Op = db.Sequelize.Op
 
+const { sequelize } = require("../models/index")
+
 
 exports.create = (req, res) => {
 
@@ -123,8 +125,6 @@ exports.findOne = (req, res) => {
 
 exports.update = (req, res) => {
 
-    console.log(req.body)
-
     const id = req.params.id
 
     const infoFestival = {
@@ -192,13 +192,14 @@ exports.switchCurrentFestival = async (req, res) => {
                 where: { idFestival: previousCurrentFestival.idFestival }
             })
 
-            return user;
+            return;
 
         });
 
         res.status(200).send({ message: "Updated festival successfully" })
 
     } catch (error) {
+        console.log(error)
         res.status(500).send({
             message: error.message || "Error updating Festival"
         });
