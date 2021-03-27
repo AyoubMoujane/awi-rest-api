@@ -150,28 +150,28 @@ exports.update = (req, res) => {
         where: { idFestival: id }
     })
         .then(num => {
-            if (num == 1) {
+            // if (num == 1) {
 
-                Espace.update(infoEspaceEntree, {
-                    where: { typeEspace: 1, festivalE: id }
-                })
+            Espace.update(infoEspaceEntree, {
+                where: { typeEspace: 1, festivalE: id }
+            })
 
-                Espace.update(infoEspaceAccueil, {
-                    where: { typeEspace: 2, festivalE: id }
-                })
+            Espace.update(infoEspaceAccueil, {
+                where: { typeEspace: 2, festivalE: id }
+            })
 
-                Espace.update(infoEspaceBuvette, {
-                    where: { typeEspace: 3, festivalE: id }
-                })
+            Espace.update(infoEspaceBuvette, {
+                where: { typeEspace: 3, festivalE: id }
+            })
 
-                res.send({
-                    message: "Festival was updated successfully."
-                });
-            } else {
-                res.status(400).send({
-                    message: `Cannot update Festival with id=${id}. Maybe Festival was not found or req.body is empty!`
-                });
-            }
+            res.send({
+                message: "Festival was updated successfully."
+            });
+            // } else {
+            //     res.status(400).send({
+            //         message: `Cannot update Festival with id=${id}. Maybe Festival was not found or req.body is empty!`
+            //     });
+            // }
         })
         .catch(err => {
             res.status(500).send({
