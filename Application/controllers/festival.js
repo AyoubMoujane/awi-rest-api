@@ -177,6 +177,8 @@ exports.update = (req, res) => {
 
 exports.switchCurrentFestival = async (req, res) => {
 
+    console.log(req.body)
+
     const previousCurrentFestival = req.body.previousCurrentFestival
     const newCurrentFestival = req.body.newCurrentFestival
 
@@ -188,9 +190,13 @@ exports.switchCurrentFestival = async (req, res) => {
                 where: { idFestival: newCurrentFestival.idFestival }
             })
 
-            await Festival.update(previousCurrentFestival, {
-                where: { idFestival: previousCurrentFestival.idFestival }
-            })
+            // In cas there are no previousCurrentFestival
+            if (previousCurrentFestival.idFestival) {
+                await Festival.update(previousCurrentFestival, {
+                    where: { idFestival: previousCurrentFestival.idFestival }
+                })
+            }
+
 
             return;
 
