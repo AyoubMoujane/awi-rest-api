@@ -14,7 +14,7 @@ exports.create = (req, res) => {
     }
 
 
-    //Create a game
+    
     const reservation = {
         dateReservation: req.body.dateReservation,
         prix: req.body.prix,
@@ -22,7 +22,8 @@ exports.create = (req, res) => {
         factureEnvoye: req.body.factureEnvoye,
         facture: req.body.facture,
         festival: req.body.festival,
-        participantReservation: req.body.participantReservation
+        participantReservation: req.body.participantReservation,
+        dateModification: req.body.dateModification
 
 
     }

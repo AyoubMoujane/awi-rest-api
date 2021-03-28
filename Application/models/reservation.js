@@ -21,6 +21,10 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.BOOLEAN,
             allowNull: false
         },
+        dateModification: {
+            type: Sequelize.DATE,
+            allowNull: false
+        },
         // facture: {
         //     type: Sequelize.INTEGER,
         //     allowNull: false
