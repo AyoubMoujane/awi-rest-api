@@ -7,7 +7,7 @@ module.exports = (sequelize, Sequelize) => {
         },
         nomZone: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: true
         },
     }, {
         tableName: 'Zone',

@@ -2,35 +2,35 @@ module.exports = (sequelize, Sequelize) => {
     const JeuExpose = sequelize.define("JeuExpose", {
         quantiteExpose: {
             type: Sequelize.INTEGER,
-            allowNull: false
+            allowNull: true
         },
         quantiteDonation: {
             type: Sequelize.INTEGER,
-            allowNull: false
+            allowNull: true
         },
         quantiteTombola: {
             type: Sequelize.INTEGER,
-            allowNull: false
+            allowNull: true
         },
         estAmene: {
             type: Sequelize.BOOLEAN,
-            allowNull: false
+            allowNull: true
         },
         estRecu: {
             type: Sequelize.BOOLEAN,
-            allowNull: false
+            allowNull: true
         },
         estARenvoye: {
             type: Sequelize.BOOLEAN,
-            allowNull: false
+            allowNull: true
         },
         aEteRenvoye: {
             type: Sequelize.BOOLEAN,
-            allowNull: false
+            allowNull: true
         },
         estPlace: {
             type: Sequelize.BOOLEAN,
-            allowNull: false
+            allowNull: true
         },
 
     }, {

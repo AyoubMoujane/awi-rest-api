@@ -1,33 +1,33 @@
 module.exports = (sequelize, Sequelize) => {
     const ExposantSuivi = sequelize.define("SuiviExposant", {
-        reponse: {
-            type: Sequelize.INTEGER,
-            allowNull: false
-        },
         commentaires: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: true
         },
         jeuxRentres: {
             type: Sequelize.BOOLEAN,
-            allowNull: false
+            allowNull: true
         },
         besoinBenevol: {
             type: Sequelize.BOOLEAN,
-            allowNull: false
+            allowNull: true
         },
         premierContact: {
             type: Sequelize.DATE,
-            allowNull: false
+            allowNull: true
         },
         secondContact: {
             type: Sequelize.DATE,
-            allowNull: false
+            allowNull: true
         },
         troisiemeContact: {
             type: Sequelize.DATE,
-            allowNull: false
+            allowNull: true
         },
+        place:{
+            type: Sequelize.BOOLEAN,
+            allowNull: true
+        }
 
     }, {
         tableName: 'SuiviExposant',

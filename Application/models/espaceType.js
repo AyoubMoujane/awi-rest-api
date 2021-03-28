@@ -7,7 +7,7 @@ module.exports = (sequelize, Sequelize) => {
         },
         nomEspace: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: true
         },
     }, {
         tableName: 'TypeEspace',

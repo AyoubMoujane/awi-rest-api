@@ -7,24 +7,20 @@ module.exports = (sequelize, Sequelize) => {
         },
         dateReservation: {
             type: Sequelize.DATE,
-            allowNull: false
+            allowNull: true
         },
         prix: {
             type: Sequelize.FLOAT,
-            allowNull: false
+            allowNull: true
         },
         remise: {
             type: Sequelize.FLOAT,
-            allowNull: false
+            allowNull: true
         },
         factureEnvoye: {
             type: Sequelize.BOOLEAN,
-            allowNull: false
+            allowNull: true
         },
-        // facture: {
-        //     type: Sequelize.INTEGER,
-        //     allowNull: false
-        // },
         
     }, {
         tableName: 'Reservation',

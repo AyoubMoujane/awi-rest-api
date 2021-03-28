@@ -7,15 +7,15 @@ module.exports = (sequelize, Sequelize) => {
         },
         nbTableMax: {
             type: Sequelize.INTEGER,
-            allowNull: false
+            allowNull: true
         },
         prixUnitaireTable: {
             type: Sequelize.FLOAT,
-            allowNull: false
+            allowNull: true
         },
         prixM2: {
             type: Sequelize.FLOAT,
-            allowNull: false
+            allowNull: true
         },
     }, {
         tableName: 'Espace',
