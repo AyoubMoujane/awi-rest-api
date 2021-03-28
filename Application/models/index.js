@@ -47,19 +47,19 @@ db.reservationEspace = require("../models/reservationEspace")(sequelize, Sequeli
 
 // Relation One to Many
 
-db.participant.hasMany(db.contact, { as: "contacts", foreignKey: "participant"})
+db.participant.hasMany(db.contact, { as: "contacts", foreignKey: "participant" })
 db.contact.belongsTo(db.participant, {
     foreignKey: "participant",
     as: "Participant",
 })
 
-db.festival.hasMany(db.reservation, { as: "reservations", foreignKey: "festival"})
+db.festival.hasMany(db.reservation, { as: "reservations", foreignKey: "festival" })
 db.reservation.belongsTo(db.festival, {
     foreignKey: "festival",
     as: "Festival",
 })
 
-db.zone.hasMany(db.jeuExpose, { as: "jeux", foreignKey: "zone"})
+db.zone.hasMany(db.jeuExpose, { as: "jeux", foreignKey: "zone" })
 db.jeuExpose.belongsTo(db.zone, {
     foreignKey: "zone",
     as: "Zone",
@@ -67,25 +67,25 @@ db.jeuExpose.belongsTo(db.zone, {
 
 // TO DO : check si ça fait pas d'erreur
 
-db.jeuType.hasMany(db.jeu, { foreignKey: "type", as: "jeux"})
+db.jeuType.hasMany(db.jeu, { foreignKey: "type", as: "jeux" })
 db.jeu.belongsTo(db.jeuType, {
     foreignKey: "type",
     as: "jeuType",
 })
 
-db.participant.hasMany(db.jeu, { foreignKey: "editeur", as: "jeux"})
+db.participant.hasMany(db.jeu, { foreignKey: "editeur", as: "jeux" })
 db.jeu.belongsTo(db.participant, {
     foreignKey: "editeur",
     as: "participant",
 })
 
-db.festival.hasMany(db.espace, { as: "espaces", foreignKey: "festivalE"})
+db.festival.hasMany(db.espace, { as: "espaces", foreignKey: "festivalE" })
 db.espace.belongsTo(db.festival, {
     foreignKey: "festivalE",
     as: "Festival"
 })
 
-db.espaceType.hasMany(db.espace, { as: "espaces", foreignKey:"typeEspace" })
+db.espaceType.hasMany(db.espace, { as: "espaces", foreignKey: "typeEspace" })
 db.espace.belongsTo(db.espaceType, {
     foreignKey: "typeEspace",
     as: "TypeEspace"
@@ -162,6 +162,7 @@ db.reservation.belongsToMany(db.espace, {
     foreignKey: "idReservation"
 })
 
+module.exports = sequelize
 
 
 

@@ -5,6 +5,8 @@ const ExposantSuivi = db.exposantSuivi
 const Participant = db.participant
 const Op = db.Sequelize.Op
 
+const { sequelize } = require("../models/index")
+
 
 exports.create = (req, res) => {
 
@@ -125,7 +127,9 @@ exports.update = (req, res) => {
 
     const infoFestival = {
         nomFestival: req.body.nomFestival,
-        dateFestival: req.body.dateFestival
+        dateFestival: req.body.dateFestival,
+        estCourant: req.body.estCourant
+
     }
 
     const infoEspaceEntree = {
@@ -144,32 +148,23 @@ exports.update = (req, res) => {
         where: { idFestival: id }
     })
         .then(num => {
-            if (num == 1) {
 
+            Espace.update(infoEspaceEntree, {
+                where: { typeEspace: 1, festivalE: id }
+            })
 
-                Espace.update(infoEspaceEntree, {
-                    where: { typeEspace: 1, festivalE: id }
-                })
+            Espace.update(infoEspaceAccueil, {
+                where: { typeEspace: 2, festivalE: id }
+            })
 
-                Espace.update(infoEspaceAccueil, {
-                    where: { typeEspace: 2, festivalE: id }
-                })
+            Espace.update(infoEspaceBuvette, {
+                where: { typeEspace: 3, festivalE: id }
+            })
 
-                Espace.update(infoEspaceBuvette, {
-                    where: { typeEspace: 3, festivalE: id }
-                })
+            res.send({
+                message: "Festival was updated successfully."
+            });
 
-
-
-
-                res.send({
-                    message: "Festival was updated successfully."
-                });
-            } else {
-                res.send({
-                    message: `Cannot update Festival with id=${id}. Maybe Festival was not found or req.body is empty!`
-                });
-            }
         })
         .catch(err => {
             res.status(500).send({
@@ -177,6 +172,43 @@ exports.update = (req, res) => {
             });
         });
 };
+
+exports.switchCurrentFestival = async (req, res) => {
+
+    console.log(req.body)
+
+    const previousCurrentFestival = req.body.previousCurrentFestival
+    const newCurrentFestival = req.body.newCurrentFestival
+
+    try {
+
+        const result = await sequelize.transaction(async (t) => {
+
+            await Festival.update(newCurrentFestival, {
+                where: { idFestival: newCurrentFestival.idFestival }
+            })
+
+            // In cas there are no previousCurrentFestival
+            if (previousCurrentFestival.idFestival) {
+                await Festival.update(previousCurrentFestival, {
+                    where: { idFestival: previousCurrentFestival.idFestival }
+                })
+            }
+
+
+            return;
+
+        });
+
+        res.status(200).send({ message: "Updated festival successfully" })
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({
+            message: error.message || "Error updating Festival"
+        });
+    }
+}
 
 
 exports.delete = (req, res) => {
