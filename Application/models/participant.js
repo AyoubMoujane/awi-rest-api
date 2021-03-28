@@ -7,11 +7,11 @@ module.exports = (sequelize, Sequelize) => {
         },
         nomParticipant: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: true
         },
         editeurSeulement: {
             type: Sequelize.BOOLEAN,
-            allowNull: false
+            allowNull: true
         },
     }, {
         tableName: 'Participant',

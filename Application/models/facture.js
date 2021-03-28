@@ -7,11 +7,11 @@ module.exports = (sequelize, Sequelize) => {
         },
         dateEmissionFacture: {
             type: Sequelize.DATE,
-            allowNull: false
+            allowNull: true
         },
         datePaiementFacture: {
             type: Sequelize.DATE,
-            allowNull: false
+            allowNull: true
         },
 
     }, {

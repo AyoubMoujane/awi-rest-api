@@ -2,11 +2,11 @@ module.exports = (sequelize, Sequelize) => {
     const ReservationEspace = sequelize.define("ReservationEspace", {
         nbTable: {
             type: Sequelize.INTEGER,
-            allowNull: false
+            allowNull: true
         },
         nbM2: {
-            type: Sequelize.FLOAT,
-            allowNull: false
+            type: Sequelize.INTEGER,
+            allowNull: true
         },
 
     }, {

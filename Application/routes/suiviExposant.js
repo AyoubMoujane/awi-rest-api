@@ -10,11 +10,26 @@ module.exports = function (app) {
     controller.create)
 
     //Retrieve all suiviExposant for a festival
-    router.get("/", 
-    [authJwt.verifyToken, authJwt.isAdmin],
+    router.get("/:id", 
+//    [authJwt.verifyToken, authJwt.isAdmin],
     controller.findAllForFestival)
     
+    //Retrieve all statusExposnant
+    router.get("/statusExposant", 
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.findStatusExposant)
 
-    app.use('/api/suiviExposant', router)
+
+    //TODO: reservation
+    //Retrieve all statusExposnant
+    router.get("/reservation/:id", 
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.findReservationByPk)
+
+    router.get("/reservation/espacesReserves", 
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.findEspacesReservesByPk)
+
+    app.use('/api/festival/suiviExposant', router)
 
 }

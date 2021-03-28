@@ -7,47 +7,47 @@ module.exports = (sequelize, Sequelize) => {
         },
         nomContact: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: true
         },
         prenomContact: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: true
         },
         emailContact: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: true
         },
         rue: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: true
         },
         cp: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: true
         },
         ville: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: true
         },
         pays: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: true
         },
         telContact: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: true
         },
         telBureau: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: true
         },
         fonctionContact: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: true
         },
         estPrincipal: {
             type: Sequelize.BOOLEAN,
-            allowNull: false
+            allowNull: true
         },
     }, {
         tableName: 'Contact',

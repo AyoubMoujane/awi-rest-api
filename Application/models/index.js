@@ -91,13 +91,20 @@ db.espace.belongsTo(db.espaceType, {
     as: "TypeEspace"
 })
 
+db.exposantStatus.hasMany(db.exposantSuivi, { as: "suivisExposants", foreignKey:"status" })
+db.exposantSuivi.belongsTo(db.exposantStatus, {
+    foreignKey: "status",
+    as: "StatusExposant"
+})
+
+db.participant.hasMany(db.reservation, { as: "reservations", foreignKey: "participantReservation"})
+db.reservation.belongsTo(db.participant, {
+    foreignKey: "participantReservation",
+    as: "Reservation",
+})
+
 
 // Relation One to One
-db.participant.hasOne(db.reservation, {
-    foreignKey: 'participantReservation'
-})
-db.reservation.belongsTo(db.participant)
-
 
 db.reservation.hasOne(db.facture, {
     foreignKey: 'reservation',

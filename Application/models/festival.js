@@ -7,15 +7,15 @@ module.exports = (sequelize, Sequelize) => {
         },
         nomFestival: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: true
         },
         dateFestival: {
             type: Sequelize.DATE,
-            allowNull: false
+            allowNull: true
         },
         estCourant: {
             type: Sequelize.BOOLEAN,
-            allowNull: false
+            allowNull: true
         },
 
     }, {

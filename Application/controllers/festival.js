@@ -8,7 +8,6 @@ const Op = db.Sequelize.Op
 
 exports.create = (req, res) => {
 
-    const idFestival = null
 
     //Create a festival with espace
     const festival = {
@@ -50,6 +49,8 @@ exports.create = (req, res) => {
             Espace.create(EspaceAccueil)
             Espace.create(EspaceBuvette)
 
+            console.log("eee")
+
             // TODO: A modifier
             // Création d'un suivi pour chaque exposant/editeur
 
@@ -60,13 +61,10 @@ exports.create = (req, res) => {
                         const exposantSuivi = {
                             idFestival: idFestival,
                             idParticipant: participant.idParticipant,
-                            reponse: 0,
-                            commentaires: "Aucun",
                             jeuxRentres: false,
                             besoinBenevol: false,
-                            premierContact: Date.now(),
-                            secondContact: Date.now(),
-                            troisiemeContact: Date.now()
+                            place: false,
+                            status:3,
                         }
 
                         ExposantSuivi.create(exposantSuivi)

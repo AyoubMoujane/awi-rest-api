@@ -7,31 +7,31 @@ module.exports = (sequelize, Sequelize) => {
         },
         nomJeu: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: true
         },
         nbJoueurMin: {
             type: Sequelize.INTEGER,
-            allowNull: false
+            allowNull: true
         },
         nbJoueurMax: {
             type: Sequelize.INTEGER,
-            allowNull: false
+            allowNull: true
         },
         age: {
             type: Sequelize.INTEGER,
-            allowNull: false
+            allowNull: true
         },
         duree: {
-            type: Sequelize.FLOAT,
-            allowNull: false
+            type: Sequelize.INTEGER,
+            allowNull: true
         },
         consigne: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: true
         },
         prototype: {
             type: Sequelize.BOOLEAN,
-            allowNull: false
+            allowNull: true
         }
 
     }, {
