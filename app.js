@@ -36,7 +36,7 @@ require('./Application/routes/zone')(app)
 require('./Application/routes/suiviExposant')(app)
 require('./Application/routes/reservation')(app)
 require('./Application/routes/jeuExpose')(app)
-
+require('./Application/routes/statusExposant')(app)
 
 
 

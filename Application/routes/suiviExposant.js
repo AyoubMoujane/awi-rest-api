@@ -13,12 +13,6 @@ module.exports = function (app) {
     router.get("/:id", 
 //    [authJwt.verifyToken, authJwt.isAdmin],
     controller.findAllForFestival)
-    
-    //Retrieve all statusExposnant
-    router.get("/statusExposant", 
-    [authJwt.verifyToken, authJwt.isAdmin],
-    controller.findStatusExposant)
-
 
     //TODO: reservation
     //Retrieve all statusExposnant
@@ -29,6 +23,7 @@ module.exports = function (app) {
     router.get("/reservation/espacesReserves", 
     [authJwt.verifyToken, authJwt.isAdmin],
     controller.findEspacesReservesByPk)
+
 
     app.use('/api/festival/suiviExposant', router)
 

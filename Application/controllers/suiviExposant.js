@@ -4,6 +4,7 @@ const ExposantStatus = db.exposantStatus
 const Reservation = db.reservation
 const ReservationEspace = db.reservationEspace
 
+
 const { Op } = require("sequelize");
 
 exports.create = (req, res) => {
@@ -38,7 +39,8 @@ exports.create = (req, res) => {
 exports.findAllForFestival = (req, res) => {
 
     ExposantSuivi.findAll({ 
-        where : { idFestival : req.params.id}
+        include : ["statusExposant", "participant"],
+        where : { idFestival : req.params.id},
     })
         .then(data => {
             res.send(data);
@@ -50,18 +52,7 @@ exports.findAllForFestival = (req, res) => {
         })
 }
 
-exports.findStatusExposant = (req, res) => {
 
-    ExposantStatus.findAll()
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: err.message || "Some error occurred..."
-            })
-        })
-}
 
 
 // TODO: à voir si ca va dans reservation controller
