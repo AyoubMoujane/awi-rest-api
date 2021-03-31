@@ -1,12 +1,16 @@
 const db = require("../models")
 const Zone = db.zone
 const festivalController = require("./festival");
+const jeuExpose = db.jeuExpose
+const jeu = db.jeu
+
 
 
 exports.create = (req, res) => {
-
+    console.log("1")
     const zone = {
-        nomZone: req.body.nomZone
+        nomZone: req.body.nomZone,
+        festivalFK: req.body.festivalFK
     }
 
     Zone.create(zone)
@@ -17,6 +21,7 @@ exports.create = (req, res) => {
             })
         })
         .catch(err => {
+            console.log(err)
             res.status(500).send({
                 message: err.message || "Echec de la création de la zone ..."
             })
@@ -43,11 +48,16 @@ exports.findAllCurrent = async (req, res) => {
 
     console.log(idFestival)
 
-    Zone.findAll({ include: ["jeux"], where: { festivalFK: idFestival } })
+    Zone.findAll({
+        include:
+            [{ model: jeuExpose, as: 'jeux', include: [{ model: jeu, as: "jeu" }] }],
+        where: { festivalFK: idFestival }
+    })
         .then(data => {
             res.send(data);
         })
         .catch(err => {
+            console.log(err)
             res.status(500).send({
                 message: err.message || "Some error occurred while researching the zone."
             })
