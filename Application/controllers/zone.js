@@ -1,5 +1,7 @@
 const db = require("../models")
 const Zone = db.zone
+const festivalController = require("./festival");
+
 
 exports.create = (req, res) => {
 
@@ -8,7 +10,7 @@ exports.create = (req, res) => {
     }
 
     Zone.create(zone)
-        .then(data =>{
+        .then(data => {
             res.send({
                 data,
                 message: "Votre zone à bien été créée !"
@@ -24,7 +26,22 @@ exports.create = (req, res) => {
 
 exports.findAll = (req, res) => {
 
-    Zone.findAll({include: [ "jeux" ]})
+    Zone.findAll({ include: ["jeux"] })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while researching the zone."
+            })
+        })
+}
+
+exports.findAllCurrent = async (req, res) => {
+
+    const idFestival = await festivalController.getCurrentFestivalId
+
+    Zone.findAll({ include: ["jeux"], where: { festivalFK: idFestival } })
         .then(data => {
             res.send(data);
         })
