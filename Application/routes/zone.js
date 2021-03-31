@@ -11,7 +11,7 @@ module.exports = function (app) {
 
     //Retrieve all Zones
     router.get("/", 
-    [authJwt.verifyToken, authJwt.isAdmin],
+    // [authJwt.verifyToken, authJwt.isAdmin],
     controller.findAll)
     
 

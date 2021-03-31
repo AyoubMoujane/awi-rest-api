@@ -1,6 +1,8 @@
 const db = require("../models")
 const Reservation = db.reservation
 const Op = db.Sequelize.Op
+const participant = db.participant
+
 
 
 exports.create = (req, res) => {
@@ -46,6 +48,7 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
 
     Reservation.findAll({
+        include: { model: participant, as: 'Participant' }
     })
         .then(data => {
             res.send(data);
