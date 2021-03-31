@@ -36,6 +36,9 @@ module.exports = function (app) {
         [authJwt.verifyToken, authJwt.isAdmin],
         controller.delete)
 
+    //Get current festival
+    router.get("/custom/courant",
+        controller.getCurrent)
 
 
     app.use('/api/festivals', router)
