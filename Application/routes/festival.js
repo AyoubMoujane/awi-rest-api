@@ -18,7 +18,7 @@ module.exports = function (app) {
 
     //Retrieve a single Festival with id
     router.get("/:id",
-        [authJwt.verifyToken, authJwt.isAdmin],
+        // [authJwt.verifyToken, authJwt.isAdmin],
         controller.findOne)
 
     //Update a Festival with id
