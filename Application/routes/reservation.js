@@ -29,6 +29,11 @@ module.exports = function (app) {
     //[authJwt.verifyToken],
     controller.delete)
 
+    //Retrieve a single reservation with id
+    router.get("/espacesReserves/:id",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.findEspacesReserveByReservation)
+
     app.use('/api/reservations', router)
 
 }

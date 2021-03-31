@@ -4,27 +4,24 @@ const controller = require("../controllers/suiviExposant");
 module.exports = function (app) {
     var router = require("express").Router()
 
-    //Create a new Zone
-    router.post("/",
-    [authJwt.verifyToken, authJwt.isAdmin],
-    controller.create)
 
     //Retrieve all suiviExposant for a festival
-    router.get("/:id", 
+    router.get("/festival/:id", 
 //    [authJwt.verifyToken, authJwt.isAdmin],
     controller.findAllForFestival)
 
-    //TODO: reservation
-    //Retrieve all statusExposnant
-    router.get("/reservation/:id", 
-    [authJwt.verifyToken, authJwt.isAdmin],
-    controller.findReservationByPk)
+    // //TODO: reservation
+    // //Retrieve all statusExposnant
+    // router.get("/reservation/:id", 
+    // [authJwt.verifyToken, authJwt.isAdmin],
+    // controller.findReservationByPk)
 
-    router.get("/reservation/espacesReserves", 
-    [authJwt.verifyToken, authJwt.isAdmin],
-    controller.findEspacesReservesByPk)
+    router.put("/premierContact/:idFestival&:idParticipant", 
+//    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.updatePremierContact)
 
 
-    app.use('/api/festival/suiviExposant', router)
+
+    app.use('/api/suiviExposant', router)
 
 }

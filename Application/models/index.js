@@ -103,6 +103,11 @@ db.exposantSuivi.belongsTo(db.participant, {
     as: "participant"
 })
 
+db.espace.hasMany(db.reservationEspace , { foreignKey:"idEspace" })
+db.reservationEspace.belongsTo(db.espace, {
+    foreignKey: "idEspace",
+    as: "espace"
+})
 
 // Relation One to One
 // db.participant.hasOne(db.reservation, {
@@ -119,6 +124,8 @@ db.reservation.belongsTo(db.participant, {
     foreignKey: "participantReservation",
     as: "Participant",
 })
+
+
 
 
 // Relation One to One
@@ -173,9 +180,5 @@ module.exports = sequelize
 
 
 
-
-
-
-
-
 module.exports = db;
+

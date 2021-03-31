@@ -91,3 +91,31 @@ exports.findEspacesReservesByPk = (req, res) => {
             })
         })
 }
+
+exports.updatePremierContact = (req, res) => {
+
+    const pk = {
+        idFestival: req.params.idFestival,
+        idParticipant: req.params.idParticipant,
+    }
+
+    const data = {
+        premierContact: req.body.premierContact
+    }
+
+
+    ExposantSuivi.update(data, {
+        where: {idFestival: pk.idFestival, idParticipant: pk.idParticipant}
+    })
+    .then(num => {
+        res.send({
+            message: "suiviExposant was updated successfully."
+        });
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: err.message || "Error updating suiviExposant"
+        });
+    });
+
+}
