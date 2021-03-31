@@ -94,7 +94,19 @@ db.espace.belongsTo(db.espaceType, {
 db.exposantStatus.hasMany(db.exposantSuivi, { as: "suivisExposants", foreignKey:"status" })
 db.exposantSuivi.belongsTo(db.exposantStatus, {
     foreignKey: "status",
-    as: "StatusExposant"
+    as: "statusExposant"
+})
+
+db.participant.hasMany(db.exposantSuivi, { as: "suivisExposants", foreignKey:"idParticipant" })
+db.exposantSuivi.belongsTo(db.participant, {
+    foreignKey: "idParticipant",
+    as: "participant"
+})
+
+db.espace.hasMany(db.reservationEspace , { foreignKey:"idEspace" })
+db.reservationEspace.belongsTo(db.espace, {
+    foreignKey: "idEspace",
+    as: "espace"
 })
 
 db.jeu.hasMany(db.jeuExpose, { foreignKey:"idJeu" })
@@ -119,6 +131,8 @@ db.reservation.belongsTo(db.participant, {
     foreignKey: "participantReservation",
     as: "Participant",
 })
+
+
 
 
 // Relation One to One
@@ -173,9 +187,5 @@ module.exports = sequelize
 
 
 
-
-
-
-
-
 module.exports = db;
+

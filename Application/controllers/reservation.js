@@ -1,5 +1,6 @@
 const db = require("../models")
 const Reservation = db.reservation
+const ReservationEspace = db.reservationEspace
 const Op = db.Sequelize.Op
 const participant = db.participant
 
@@ -120,6 +121,21 @@ exports.delete = (req, res) => {
             console.log(err)
             res.status(500).send({
                 message: err.message || "Some error occurred while creating the Reservation."
+            })
+        })
+}
+
+exports.findEspacesReserveByReservation = (req, res) => {
+
+    ReservationEspace.findAll({
+        where : { idReservation : req.params.id},
+    })
+        .then(data => {
+            res.send(data)
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error retrieving Reservation with id=" + id
             })
         })
 }

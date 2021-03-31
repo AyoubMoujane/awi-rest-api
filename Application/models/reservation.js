@@ -21,10 +21,10 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.BOOLEAN,
             allowNull: true
         },
-        dateModification: {
-            type: Sequelize.DATE,
-            allowNull: false
-        },
+        // dateModification: {
+        //     type: Sequelize.DATE,
+        //     allowNull: false
+        // },
  
     }, {
         tableName: 'Reservation',
