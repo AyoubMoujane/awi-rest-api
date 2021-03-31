@@ -258,7 +258,7 @@ exports.getCurrent = (req, res) => {
 
 }
 
-exports.getCurrentFestivalId = Festival.findOne({ where: { estCourant: 1 } })
+exports.getCurrentFestivalId = () => Festival.findOne({ where: { estCourant: 1 } })
     .then(festival => {
         return festival.idFestival
     })

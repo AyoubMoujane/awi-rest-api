@@ -39,7 +39,9 @@ exports.findAll = (req, res) => {
 
 exports.findAllCurrent = async (req, res) => {
 
-    const idFestival = await festivalController.getCurrentFestivalId
+    let idFestival = await festivalController.getCurrentFestivalId()
+
+    console.log(idFestival)
 
     Zone.findAll({ include: ["jeux"], where: { festivalFK: idFestival } })
         .then(data => {
