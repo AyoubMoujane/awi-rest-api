@@ -9,6 +9,9 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
             allowNull: true
         },
+        festivalFK: {
+            type: Sequelize.INTEGER,
+        }
     }, {
         tableName: 'Zone',
         createdAt: false,

@@ -6,14 +6,18 @@ module.exports = function (app) {
 
     //Create a new Zone
     router.post("/",
-    [authJwt.verifyToken, authJwt.isAdmin],
-    controller.create)
+        [authJwt.verifyToken, authJwt.isAdmin],
+        controller.create)
 
     //Retrieve all Zones
-    router.get("/", 
-    // [authJwt.verifyToken, authJwt.isAdmin],
-    controller.findAll)
-    
+    router.get("/",
+        [authJwt.verifyToken, authJwt.isAdmin],
+        controller.findAll)
+
+    //Retrieve zones of the current festival
+    router.get("/custom/courant",
+        controller.findAllCurrent)
+
 
     app.use('/api/zones', router)
 

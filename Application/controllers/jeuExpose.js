@@ -61,7 +61,7 @@ exports.findOne = (req, res) => {
     const idJeu = req.params.idJeu
 
     JeuExpose.findAll( {
-        where: { idReservation: idReservation, idJeu : idJeu }
+        include: ["reservations"], where: { idReservation: idReservation, idJeu : idJeu }
     })
         .then(data => {
             res.send(data)

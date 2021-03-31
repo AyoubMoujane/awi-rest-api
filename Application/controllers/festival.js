@@ -66,7 +66,7 @@ exports.create = (req, res) => {
                             jeuxRentres: false,
                             besoinBenevol: false,
                             place: false,
-                            status:3,
+                            status: 3,
                         }
 
                         ExposantSuivi.create(exposantSuivi)
@@ -235,3 +235,33 @@ exports.delete = (req, res) => {
             });
         });
 };
+
+exports.getCurrent = (req, res) => {
+
+    Festival.findOne({ where: { estCourant: 1 } })
+        .then(festival => {
+            if (festival === null) {
+                res.status(500).send({
+                    message: "No current festival !"
+                });
+            } else {
+                res.status(200).send({
+                    festival
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err
+            });
+        });
+
+}
+
+exports.getCurrentFestivalId = () => Festival.findOne({ where: { estCourant: 1 } })
+    .then(festival => {
+        return festival.idFestival
+    })
+    .catch(err => {
+        throw err
+    });
