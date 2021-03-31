@@ -97,6 +97,13 @@ db.exposantSuivi.belongsTo(db.exposantStatus, {
     as: "StatusExposant"
 })
 
+db.jeu.hasMany(db.jeuExpose, { foreignKey:"idJeu" })
+db.jeuExpose.belongsTo(db.jeu, {
+    foreignKey: "idJeu",
+    as: "jeu"
+})
+
+
 // Relation One to One
 // db.participant.hasOne(db.reservation, {
 //     as: "participantReservation",
