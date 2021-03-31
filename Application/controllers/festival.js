@@ -96,7 +96,7 @@ exports.create = (req, res) => {
 
 exports.findAll = (req, res) => {
 
-    Festival.findAll({ include: ["espaces"] })
+    Festival.findAll({ include: ["espaces","participants"] })
         .then(data => {
             res.send(data);
         })

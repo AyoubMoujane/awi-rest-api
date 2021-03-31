@@ -1,5 +1,7 @@
 const db = require("../models")
 const Participant = db.participant
+const festivalController = require("./festival");
+
 
 exports.findAll = (req, res) => {
     Participant.findAll()
@@ -14,20 +16,20 @@ exports.findAll = (req, res) => {
         });
 };
 
+exports.findOne = (req, res) => {
+    const id = req.params.id
 
-// TODO: A modifier 
-exports.findAllExposant = (req, res) => {
-    Participant.findAll()
-    .then(data => {
-        res.send(data);
-    })
-    .catch(err => {
-        res.status(500).send({
-            message:
-                err.message || "Some error occurred while retrieving participants."
-        });
-    });
+    Participant.findByPk(id)
+        .then(data => {
+            res.send(data)
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error retrieving Participant with id=" + id
+            })
+        })
 }
+
 
 exports.create = (req, res) => {
 
@@ -112,4 +114,27 @@ exports.update = (req, res) => {
         })
 
 
+}
+
+
+exports.findAllCurrent = async (req, res) => {
+
+    let idFestival = await festivalController.getCurrentFestivalId()
+
+    console.log(idFestival)
+
+    Participant.findAll({
+        // include:
+        //     [{ model: jeu, as: 'jeux' }],
+        // where: { festivalFK: idFestival }
+    })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).send({
+                message: err.message || "Some error occurred while researching the participant."
+            })
+        })
 }
