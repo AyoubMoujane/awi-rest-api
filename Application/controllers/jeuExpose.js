@@ -9,19 +9,19 @@ const festivalController = require("./festival");
 exports.create = (req, res) => {
 
 
-    
+
     const jeuExpose = {
-        idReservation : req.body.idReservation,
-        idJeu : req.body.idJeu,
-        quantiteExpose : req.body.quantiteExpose,
-        quantiteDonation :req.body.quantiteDonation,
+        idReservation: req.body.idReservation,
+        idJeu: req.body.idJeu,
+        quantiteExpose: req.body.quantiteExpose,
+        quantiteDonation: req.body.quantiteDonation,
         quantiteTombola: req.body.quantiteTombola,
         estAmene: req.body.estAmene,
-        estRecu : req.body.estRecu,
-        estARenvoye : req.body.estARenvoye,
-        aEteRenvoye : req.body.aEteRenvoye,
+        estRecu: req.body.estRecu,
+        estARenvoye: req.body.estARenvoye,
+        aEteRenvoye: req.body.aEteRenvoye,
         estPlace: req.body.estPlace,
-        zone : req.body.zone,
+        zone: req.body.zone,
 
 
 
@@ -37,7 +37,7 @@ exports.create = (req, res) => {
             })
             console.log(err.message)
         })
-    
+
 
 
 }
@@ -52,7 +52,7 @@ exports.findAll = (req, res) => {
         .catch(err => {
             res.status(500).send({
                 message: err.message || "Some error occurred while searching the jeuExpose."
-                
+
             })
             console.log(err.message)
         })
@@ -62,8 +62,8 @@ exports.findOne = (req, res) => {
     const idReservation = req.params.idReservation;
     const idJeu = req.params.idJeu
 
-    JeuExpose.findAll( {
-        include: ["reservations"], where: { idReservation: idReservation, idJeu : idJeu }
+    JeuExpose.findAll({
+        include: ["reservations"], where: { idReservation: idReservation, idJeu: idJeu }
     })
         .then(data => {
             res.send(data)
@@ -79,7 +79,7 @@ exports.update = (req, res) => {
     const idReservation = req.params.idReservation;
     const idJeu = req.params.idJeu
     JeuExpose.update(req.body, {
-        where: { idReservation: idReservation, idJeu : idJeu }
+        where: { idReservation: idReservation, idJeu: idJeu }
     })
         .then(num => {
             if (num == 1) {
@@ -105,7 +105,7 @@ exports.delete = (req, res) => {
     const idReservation = req.params.idReservation;
     const idJeu = req.params.idJeu
 
-    JeuExpose.destroy({ where: { idReservation: idReservation, idJeu : idJeu } })
+    JeuExpose.destroy({ where: { idReservation: idReservation, idJeu: idJeu } })
         .then(() => {
             res.status(204).end()
         })
@@ -124,8 +124,8 @@ exports.findAllCurrent = async (req, res) => {
     // remplacer 8 par idFestival
     JeuExpose.findAll({
         include:
-            [{ model: db.jeu, as: 'jeu', include: "participant" },{ model: db.jeu, as: 'Zone' }],
-        
+            [{ model: db.jeu, as: 'jeu', include: "participant" }, { model: db.zone, as: 'Zone' }],
+
     })
         .then(data => {
             res.send(data);
