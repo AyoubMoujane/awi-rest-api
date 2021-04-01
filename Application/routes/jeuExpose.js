@@ -5,30 +5,35 @@ module.exports = function (app) {
     var router = require("express").Router()
 
     //Create a new jeuExpose
-    router.post("/",
+    router.post("/api/jeuxExposes/",
     // [authJwt.verifyToken],
     controller.create)
 
     //Retrieve all jeuExpose
-    router.get("/", 
+    router.get("/api/jeuxExposes/", 
     // [authJwt.verifyToken],
     controller.findAll)
 
     //Retrieve a single jeuExpose with id
-    router.get("/:idReservation&:idJeu",
+    router.get("/api/jeuxExposes/:idReservation&:idJeu",
     // [authJwt.verifyToken],
     controller.findOne)
 
     //Update a jeuExpose with id
-    router.put("/:idReservation&:idJeu",
+    router.put("/api/jeuxExposes/:idReservation&:idJeu",
     // [authJwt.verifyToken],
     controller.update)
 
     //Delete a jeuExpose with id
-    router.delete("/:idReservation&:idJeu",
+    router.delete("/api/jeuxExposes/:idReservation&:idJeu",
     //[authJwt.verifyToken],
     controller.delete)
 
-    app.use('/api/jeuxExposes', router)
+    //Delete a jeuExpose with id
+    router.get("/api/custom/jeuxExposes",
+    //[authJwt.verifyToken],
+    controller.findAllCurrent)
+
+    app.use('', router)
 
 }

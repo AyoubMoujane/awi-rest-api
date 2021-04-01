@@ -1,6 +1,11 @@
-const db = require("../models")
+const db = require("../models");
+const exposantSuivi = require("../models/exposantSuivi");
+const participant = require("../models/participant");
 const Participant = db.participant
 const festivalController = require("./festival");
+const jeu = db.jeu
+
+
 
 
 exports.findAll = (req, res) => {
@@ -121,12 +126,11 @@ exports.findAllCurrent = async (req, res) => {
 
     let idFestival = await festivalController.getCurrentFestivalId()
 
-    console.log(idFestival)
-
+    // remplacer 8 par idFestival
     Participant.findAll({
-        // include:
-        //     [{ model: jeu, as: 'jeux' }],
-        // where: { festivalFK: idFestival }
+        include:
+            [{ model: jeu, as: 'jeux' },{ model:db.exposantSuivi, as: 'suivisExposants',where:{idFestival: 8 } }],
+        
     })
         .then(data => {
             res.send(data);

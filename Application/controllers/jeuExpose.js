@@ -1,6 +1,8 @@
 const db = require("../models")
 const JeuExpose = db.jeuExpose
 const Op = db.Sequelize.Op
+const festivalController = require("./festival");
+
 
 
 
@@ -111,6 +113,27 @@ exports.delete = (req, res) => {
             console.log(err)
             res.status(500).send({
                 message: err.message || "Some error occurred while creating the jeuExpose."
+            })
+        })
+}
+
+exports.findAllCurrent = async (req, res) => {
+
+    let idFestival = await festivalController.getCurrentFestivalId()
+
+    // remplacer 8 par idFestival
+    JeuExpose.findAll({
+        include:
+            [{ model: db.jeu, as: 'jeu', include: "participant" },{ model: db.jeu, as: 'Zone' }],
+        
+    })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).send({
+                message: err.message || "Some error occurred while researching the participant."
             })
         })
 }
