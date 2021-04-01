@@ -49,7 +49,7 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
 
     Reservation.findAll({
-        include: { model: participant, as: 'Participant' }
+        include: [{ model: participant, as: 'Participant' },{ model: db.jeu, as: 'jeux' }]
     })
         .then(data => {
             res.send(data);

@@ -96,7 +96,9 @@ exports.create = (req, res) => {
 
 exports.findAll = (req, res) => {
 
-    Festival.findAll({ include: ["espaces","participants"] })
+    Festival.findAll({ include: 
+        ["espaces","participants"] 
+    })
         .then(data => {
             res.send(data);
         })
@@ -110,7 +112,8 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
     const id = req.params.id
 
-    Festival.findByPk(id)
+    Festival.findByPk(id,{include: 
+        ["espaces","participants"]})
         .then(data => {
             res.send(data)
         })
