@@ -4,7 +4,7 @@ const participant = require("../models/participant");
 const Participant = db.participant
 const festivalController = require("./festival");
 const jeu = db.jeu
-
+const Reservation = db.reservation
 
 
 
@@ -126,14 +126,24 @@ exports.findAllCurrent = async (req, res) => {
 
     let idFestival = await festivalController.getCurrentFestivalId()
 
-    // remplacer 8 par idFestival
     Participant.findAll({
         include:
-            [{ model: jeu, as: 'jeux' },{ model:db.exposantSuivi, as: 'suivisExposants',where:{idFestival: 8 } }],
+            [{ model: jeu, as: 'jeux', 
+            include: {
+                model: Reservation , as: "reservations", where: {festival: idFestival}
+            }
+            }]
         
     })
         .then(data => {
-            res.send(data);
+            const result = []
+            data.map((participant) =>{
+                if (participant.jeux.length !=0 ){
+                    console.log(participant.jeux)
+                    result.push(participant)
+                }
+            })
+            res.send(result);
         })
         .catch(err => {
             console.log(err)
