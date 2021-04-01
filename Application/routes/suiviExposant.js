@@ -20,6 +20,28 @@ module.exports = function (app) {
 //    [authJwt.verifyToken, authJwt.isAdmin],
     controller.updatePremierContact)
 
+    router.put("/secondContact/:idFestival&:idParticipant", 
+    //    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.updateSecondContact)
+
+    router.put("/troisiemeContact/:idFestival&:idParticipant", 
+    //    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.updateTroisiemeContact)
+
+    router.put("/status/:idFestival&:idParticipant", 
+    //    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.updateStatus)
+
+    router.put("/place/:idFestival&:idParticipant", 
+    //    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.updatePlace)
+
+    router.put("/besoinBenevol/:idFestival&:idParticipant", 
+    //    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.updateBesoinBenevol)
+
+    
+
 
 
     app.use('/api/suiviExposant', router)
