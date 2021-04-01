@@ -124,13 +124,8 @@ exports.findAllCurrent = async (req, res) => {
     // remplacer 8 par idFestival
     JeuExpose.findAll({
         include:
-<<<<<<< HEAD
             [{ model: db.jeu, as: 'jeu', include: "participant" }, { model: db.zone, as: 'Zone' }],
 
-=======
-            [{ model: db.jeu, as: 'jeu', include: "participant" },{ model: db.zone, as: 'Zone' }],
-        
->>>>>>> routes_customs
     })
         .then(data => {
             res.send(data);
