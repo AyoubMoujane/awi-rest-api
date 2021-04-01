@@ -18,8 +18,6 @@ exports.create = (req, res) => {
         estCourant: req.body.estCourant ? req.body.estCourant : false,
     }
 
-    console.log(festival.nomFestival)
-
     Festival.create(festival)
         .then(data => {
 
