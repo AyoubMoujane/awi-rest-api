@@ -39,6 +39,8 @@ require('./Application/routes/jeuExpose')(app)
 require('./Application/routes/statusExposant')(app)
 require('./Application/routes/espaceReserve')(app)
 require('./Application/routes/espace')(app)
+require('./Application/routes/reservationEspace')(app)
+
 
 // Connect to MongoDB
 const dbAuth = require('./Authentication/config/db').mongoURI
