@@ -119,3 +119,147 @@ exports.updatePremierContact = (req, res) => {
     });
 
 }
+
+
+exports.updateSecondContact = (req, res) => {
+
+    const pk = {
+        idFestival: req.params.idFestival,
+        idParticipant: req.params.idParticipant,
+    }
+
+    const data = {
+        secondContact: req.body.secondContact
+    }
+
+    console.log(data)
+
+
+    ExposantSuivi.update(data, {
+        where: {idFestival: pk.idFestival, idParticipant: pk.idParticipant}
+    })
+    .then(num => {
+        res.send({
+            message: "suiviExposant was updated successfully."
+        });
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: err.message || "Error updating suiviExposant"
+        });
+    });
+
+}
+
+
+exports.updateTroisiemeContact = (req, res) => {
+
+    const pk = {
+        idFestival: req.params.idFestival,
+        idParticipant: req.params.idParticipant,
+    }
+
+    const data = {
+        troisiemeContact: req.body.troisiemeContact
+    }
+
+
+    ExposantSuivi.update(data, {
+        where: {idFestival: pk.idFestival, idParticipant: pk.idParticipant}
+    })
+    .then(num => {
+        res.send({
+            message: "suiviExposant was updated successfully."
+        });
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: err.message || "Error updating suiviExposant"
+        });
+    });
+
+}
+
+
+exports.updateStatus = (req, res) => {
+
+    const pk = {
+        idFestival: req.params.idFestival,
+        idParticipant: req.params.idParticipant,
+    }
+
+    const data = {
+        status: req.body.status
+    }
+
+
+    ExposantSuivi.update(data, {
+        where: {idFestival: pk.idFestival, idParticipant: pk.idParticipant}
+    })
+    .then(num => {
+        res.send({
+            message: "suiviExposant was updated successfully."
+        });
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: err.message || "Error updating suiviExposant"
+        });
+    });
+
+}
+
+exports.updatePlace = (req, res) => {
+
+    const pk = {
+        idFestival: req.params.idFestival,
+        idParticipant: req.params.idParticipant,
+    }
+
+    const data = {
+        place: req.body.place
+    }
+
+
+    ExposantSuivi.update(data, {
+        where: {idFestival: pk.idFestival, idParticipant: pk.idParticipant}
+    })
+    .then(num => {
+        res.send({
+            message: "suiviExposant was updated successfully."
+        });
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: err.message || "Error updating suiviExposant"
+        });
+    });
+}
+
+
+exports.updateBesoinBenevol = (req, res) => {
+    
+    const pk = {
+        idFestival: req.params.idFestival,
+        idParticipant: req.params.idParticipant,
+    }
+
+    const data = {
+        besoinBenevol: req.body.besoinBenevol
+    }
+
+
+    ExposantSuivi.update(data, {
+        where: {idFestival: pk.idFestival, idParticipant: pk.idParticipant}
+    })
+    .then(num => {
+        res.send({
+            message: "suiviExposant was updated successfully."
+        });
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: err.message || "Error updating suiviExposant"
+        });
+    });
+}

@@ -121,6 +121,11 @@ db.jeuExpose.belongsTo(db.jeu, {
     as: "jeu"
 })
 
+db.reservation.hasMany(db.jeuExpose, { foreignKey:"idReservation" })
+db.jeuExpose.belongsTo(db.reservation, {
+    foreignKey: "idReservation",
+    as: "reservation"
+})
 
 // Relation One to One
 // db.participant.hasOne(db.reservation, {
@@ -137,6 +142,7 @@ db.reservation.belongsTo(db.participant, {
     foreignKey: "participantReservation",
     as: "Participant",
 })
+
 
 
 
