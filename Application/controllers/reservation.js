@@ -159,3 +159,29 @@ exports.findReservationByParticipant = (req, res) => {
         })
     })
 }
+
+
+
+exports.findReservationByFestival = (req, res) => {
+    const id = {
+        festival: req.params.festival,
+    }
+
+
+    Reservation.findAll({
+        where: {festival: id.festival},
+        include : ["Participant"]
+    })
+    .then(data => {
+        // if (data === null ){
+        //     data = []
+        // }
+        console.log(data)
+        res.send(data)
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: "Error retrieving Reservation with id"
+        })
+    })
+}

@@ -40,6 +40,14 @@ module.exports = function (app) {
     controller.findReservationByParticipant)
 
 
+    router.get("/reservationExposantByFestival/:festival",
+ //   [authJwt.verifyToken, authJwt.isAdmin],
+    controller.findReservationByFestival)
+
+
+
+
+
 
     app.use('/api', router)
 
