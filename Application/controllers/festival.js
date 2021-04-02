@@ -97,7 +97,7 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
 
     Festival.findAll({ include: 
-        ["espaces","participants"] 
+        ["espaces","participants","zones"] 
     })
         .then(data => {
             res.send(data);
@@ -119,7 +119,7 @@ exports.findOne = (req, res) => {
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error retrieving Tutorial with id=" + id
+                message: "Error retrieving festival with id=" + id
             })
         })
 }

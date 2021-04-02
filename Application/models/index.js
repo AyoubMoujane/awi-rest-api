@@ -85,6 +85,12 @@ db.espace.belongsTo(db.festival, {
     as: "Festival"
 })
 
+db.festival.hasMany(db.zone, { as: "zones" , foreignKey: "festivalFK"})
+db.zone.belongsTo(db.festival, {
+    foreignKey: "festivalFK",
+    as: "Festival"
+})
+
 db.espaceType.hasMany(db.espace, { as: "espaces", foreignKey: "typeEspace" })
 db.espace.belongsTo(db.espaceType, {
     foreignKey: "typeEspace",
