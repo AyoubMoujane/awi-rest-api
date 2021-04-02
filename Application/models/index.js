@@ -109,7 +109,7 @@ db.reservationEspace.belongsTo(db.espace, {
     as: "espace"
 })
 
-db.jeu.hasMany(db.jeuExpose, { foreignKey:"idJeu" })
+db.jeu.hasMany(db.jeuExpose, { foreignKey:"idJeu", as :"jeu"})
 db.jeuExpose.belongsTo(db.jeu, {
     foreignKey: "idJeu",
     as: "jeu"
